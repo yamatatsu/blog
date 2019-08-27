@@ -74,5 +74,13 @@ module.exports = {
         pathToConfigModule: "src/utils/typography",
       },
     },
+    {
+      resolve: "gatsby-plugin-html2amp",
+      options: {
+        files: ["post/**/index.html", "index.html"],
+        publicPath: "public",
+        dist: "public/dist",
+      },
+    },
   ],
 }
