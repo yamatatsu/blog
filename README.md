@@ -5,7 +5,7 @@
 ## やりたきこと
 
 - [x] hosting
-- [ ] domain
+- [x] domain
 - [ ] amp
 - [ ] ga
 - [ ] contents
