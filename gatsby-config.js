@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: "やまたつ",
+    title: "やまたつメモ",
     author: "yamatats",
-    description: "ブログです。",
+    description: "ブログです。メモです。",
     siteUrl: "https://blog.yamatatsu193.net/",
     social: {
       twitter: "yamatatsu193",

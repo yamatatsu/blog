@@ -54,7 +54,6 @@ const Bio = () => {
         }}
       />
       <p>
-        ブログです。
         <a href={`https://twitter.com/${social.twitter}`}>Twitter</a>
       </p>
     </div>
