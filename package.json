@@ -1,12 +1,12 @@
 {
   "name": "blog",
-  "description": "A starter for a blog powered by Gatsby and Markdown",
+  "description": "blog",
   "version": "0.1.0",
   "author": "yamatatsu <the.kinnikuman@gmail.com>",
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "start": "npm run develop",
+    "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
