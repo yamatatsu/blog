@@ -1,6 +1,7 @@
 ---
 title: Gatsbyしてみた
 date: "2019-08-27"
+description: "GatsbyでBlogを始めてみたのでとりまログる"
 ---
 
 とくに今更書くようなことでもないなぁ。
