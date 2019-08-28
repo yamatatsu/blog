@@ -77,9 +77,8 @@ module.exports = {
     {
       resolve: "gatsby-plugin-html2amp",
       options: {
-        files: ["post/**/index.html", "index.html"],
+        files: ["01_start-amp/index.html"], // 試験的にこいつだけ
         publicPath: "public",
-        dist: "public/dist",
       },
     },
   ],
