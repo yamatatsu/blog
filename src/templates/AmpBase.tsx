@@ -16,7 +16,7 @@ const BodyContent: FunctionComponent = () => (
       <h1>やまたつ Blog</h1>
       <Amp.AmpImg
         specName="default"
-        src="/assets/profile-pic.png"
+        src="/images/profile-pic.png"
         width={120}
         height={120}
         alt="yamatatsu"

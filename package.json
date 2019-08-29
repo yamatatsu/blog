@@ -6,9 +6,11 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "npm-run-all -p build:html build:assets",
+    "build": "npm-run-all -p build:html build:static build:images",
     "build:html": "ts-node src/index.tsx",
-    "build:assets": "cp -r assets public/",
+    "build:static": "cp -r static/* public/",
+    "build:images": "cp -r images public/",
+    "clean": "rm -rf ./public && mkdir ./public",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
   },
   "dependencies": {
