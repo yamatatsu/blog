@@ -6,6 +6,7 @@
 
 - [x] hosting
 - [x] domain
+- [ ] generate statics
 - [ ] amp
 - [ ] ga
 - [ ] contents
