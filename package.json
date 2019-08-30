@@ -6,10 +6,10 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "npm-run-all -p build:html build:static build:images",
+    "build": "npm-run-all -pl build:html build:static build:images",
     "build:html": "ts-node src/index.tsx",
-    "build:static": "cp -r static/* public/",
-    "build:images": "cp -r images public/",
+    "build:static": "cp -rv ./static/* ./public/",
+    "build:images": "cp -rv ./images ./public/",
     "clean": "rm -rf ./public && mkdir ./public",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \""
   },
