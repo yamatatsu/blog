@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "npm-run-all -pl build:html build:static build:images",
+    "build": "mkdir -p public && npm-run-all -pl build:html build:static build:images",
     "build:html": "ts-node src/index.tsx",
     "build:static": "cp -rv ./static/* ./public/",
     "build:images": "cp -rv ./images ./public/",
