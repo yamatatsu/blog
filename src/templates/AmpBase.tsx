@@ -21,7 +21,6 @@ const BodyContent: FunctionComponent = () => (
         height={120}
         alt="yamatatsu"
       />
-      <Amp.AmpAccordion />
     </div>
   </AmpScriptsManager>
 )
