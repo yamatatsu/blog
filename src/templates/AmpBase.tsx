@@ -21,6 +21,7 @@ const AmpBase: FunctionComponent<Props> = props => {
         <Amp.AmpAnalytics type="gtag" data-credentials="include">
           <script
             type="application/json"
+            // 公式 https://github.com/dfrankland/react-amphtml#amp-setup
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 vars: {
@@ -45,6 +46,7 @@ const AmpBase: FunctionComponent<Props> = props => {
         <meta name="Description" content={description}></meta>
         {ampScripts.getScriptElements()}
       </head>
+      {/* 公式 https://github.com/dfrankland/react-amphtml#amp-setup */}
       <body dangerouslySetInnerHTML={{ __html: bodyContent }} />
     </Amp.Html>
   )
