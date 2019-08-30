@@ -24,6 +24,21 @@ const AmpBase: FunctionComponent<Props> = props => {
         <AmpScriptsManager ampScripts={ampScripts}>
           <Body></Body>
         </AmpScriptsManager>
+        <Amp.AmpAnalytics type="gtag" data-credentials="include">
+          <script
+            type="application/json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                vars: {
+                  gtag_id: "UA-146821060-1",
+                  config: {
+                    "UA-146821060-1": { groups: "default" },
+                  },
+                },
+              }),
+            }}
+          />
+        </Amp.AmpAnalytics>
       </body>
     </Amp.Html>
   )

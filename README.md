@@ -27,5 +27,5 @@ So I don't use Gatsby. And I use AMP and [remark](https://github.com/remarkjs/re
 - [x] link to home
 - [ ] style as gatsby blog
 - [ ] lighthouse
-- [ ] ga
+- [x] ga
 - [ ] contents
