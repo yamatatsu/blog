@@ -8,15 +8,16 @@ import {
 
 const ampScripts = new AmpScripts()
 
-type Props = { canonical: string; body: FunctionComponent }
+type Props = { canonical: string; description: string; body: FunctionComponent }
 
 const AmpBase: FunctionComponent<Props> = props => {
-  const { canonical, body: Body } = props
+  const { canonical, description, body: Body } = props
   return (
     <Amp.Html>
       <head>
         {headerBoilerplate(canonical)}
         <title>やまたつ Blog</title>
+        <meta name="Description" content={description}></meta>
         {ampScripts.getScriptElements()}
       </head>
       <body>

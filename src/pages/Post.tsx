@@ -8,10 +8,11 @@ type Props = { post: Post }
 
 export default function Post(props: Props) {
   const { post } = props
-  const { filename, contents } = post
+  const { filename, contents, postHeader } = post
   return (
     <AmpBase
       canonical={`https://blog.yamatatsu193.net/${filename}`}
+      description={postHeader.description}
       body={() => (
         <div>
           <a href="https://blog.yamatatsu193.net/">

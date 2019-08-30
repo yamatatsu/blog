@@ -11,6 +11,7 @@ export default function Home(props: Props) {
   return (
     <AmpBase
       canonical="https://blog.yamatatsu193.net/"
+      description="プログラミング関連のことを書きます"
       body={() => (
         <div>
           <h1>やまたつ Blog</h1>
