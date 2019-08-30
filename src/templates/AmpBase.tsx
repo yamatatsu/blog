@@ -8,34 +8,24 @@ import {
 
 const ampScripts = new AmpScripts()
 
-type Props = {}
+type Props = { canonical: string; body: FunctionComponent }
 
-const BodyContent: FunctionComponent = () => (
-  <AmpScriptsManager ampScripts={ampScripts}>
-    <div>
-      <h1>やまたつ Blog</h1>
-      <Amp.AmpImg
-        specName="default"
-        src="/images/profile-pic.png"
-        width={120}
-        height={120}
-        alt="yamatatsu"
-      />
-    </div>
-  </AmpScriptsManager>
-)
-
-export default function AmpBase(props: Props) {
+const AmpBase: FunctionComponent<Props> = props => {
+  const { canonical, body: Body } = props
   return (
     <Amp.Html>
       <head>
-        {headerBoilerplate("/")}
+        {headerBoilerplate(canonical)}
         <title>やまたつ Blog</title>
         {ampScripts.getScriptElements()}
       </head>
       <body>
-        <BodyContent />
+        <AmpScriptsManager ampScripts={ampScripts}>
+          <Body></Body>
+        </AmpScriptsManager>
       </body>
     </Amp.Html>
   )
 }
+
+export default AmpBase
