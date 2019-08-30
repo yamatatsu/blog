@@ -34,15 +34,16 @@ const posts = filenames.map<Post>(filename => {
   return { filename: filename.replace(/\.md$/, ""), postHeader, contents }
 })
 
-render("index", <Home posts={posts} />)
+render("index.html", <Home posts={posts} />)
 
 posts.forEach(post => {
-  render(post.filename, <PostPage post={post} />)
+  fs.mkdirSync(`${__dirname}/../public/${post.filename}`, { recursive: true })
+  render(`${post.filename}/index.html`, <PostPage post={post} />)
 })
 
 function render(name: string, element: React.ReactElement) {
   fs.writeFileSync(
-    `${__dirname}/../public/${name}.html`,
+    `${__dirname}/../public/${name}`,
     "<!doctype html>" + renderToStaticMarkup(element)
   )
 }

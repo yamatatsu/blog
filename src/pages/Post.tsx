@@ -11,7 +11,7 @@ export default function Post(props: Props) {
   const { filename, contents } = post
   return (
     <AmpBase
-      canonical="https://blog.yamatatsu193.net/"
+      canonical={`https://blog.yamatatsu193.net/${filename}`}
       body={() => (
         <div>
           <h1>{filename}</h1>

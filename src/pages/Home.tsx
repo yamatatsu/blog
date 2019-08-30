@@ -25,7 +25,7 @@ export default function Home(props: Props) {
             const { filename, postHeader } = post
             const { title, date, description } = postHeader
             return (
-              <a key={filename} href={`/${filename}.html`}>
+              <a key={filename} href={`/${filename}`}>
                 <div>title: {title}</div>
                 <div>date: {date}</div>
                 <div>description: {description}</div>
