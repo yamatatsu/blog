@@ -14,6 +14,9 @@ export default function Post(props: Props) {
       canonical={`https://blog.yamatatsu193.net/${filename}`}
       body={() => (
         <div>
+          <a href="https://blog.yamatatsu193.net/">
+            <h3>やまたつ Blog</h3>
+          </a>
           <h1>{filename}</h1>
           <Amp.AmpImg
             specName="default"

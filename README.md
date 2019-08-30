@@ -23,8 +23,8 @@ So I don't use Gatsby. And I use AMP and [remark](https://github.com/remarkjs/re
 - [x] generate statics
 - [x] amp
 - [x] post as Markdown
-- [ ] remove '.html' from url
-- [ ] link to home
+- [x] remove '.html' from url
+- [x] link to home
 - [ ] style as gatsby blog
 - [ ] lighthouse
 - [ ] ga
