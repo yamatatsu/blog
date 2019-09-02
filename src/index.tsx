@@ -1,6 +1,5 @@
 import fs from "fs"
-import React from "react"
-import { renderToStaticMarkup } from "react-dom/server"
+import ejs from "ejs"
 import { Parent } from "unist"
 import unified from "unified"
 import parse from "remark-parse"
@@ -8,11 +7,9 @@ import yaml from "js-yaml"
 // @ts-ignore
 import frontmatter from "remark-frontmatter"
 // @ts-ignore
-import remark2react from "remark-react"
+import remarkHtml from "remark-html"
 
 import { Post } from "./type"
-import Home from "./pages/Home"
-import PostPage from "./pages/Post"
 
 const filenames = fs.readdirSync(`${__dirname}/../posts`)
 
@@ -28,22 +25,28 @@ const posts = filenames.map<Post>(filename => {
   const contents = unified()
     .use(parse)
     .use(frontmatter)
-    .use(remark2react)
+    .use(remarkHtml)
     .processSync(md).contents as string
 
   return { filename: filename.replace(/\.md$/, ""), postHeader, contents }
 })
 
-render("index.html", <Home posts={posts} />)
-
-posts.forEach(post => {
-  fs.mkdirSync(`${__dirname}/../public/${post.filename}`, { recursive: true })
-  render(`${post.filename}/index.html`, <PostPage post={post} />)
+ejs.renderFile(`${__dirname}/../ejs/index.ejs`, { posts }, (err, str) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  fs.writeFileSync(`${__dirname}/../public/index.html`, str)
 })
 
-function render(name: string, element: React.ReactElement) {
-  fs.writeFileSync(
-    `${__dirname}/../public/${name}`,
-    "<!doctype html>" + renderToStaticMarkup(element)
-  )
-}
+posts.forEach(post => {
+  ejs.renderFile(`${__dirname}/../ejs/post.ejs`, { post }, (err, str) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+
+    fs.mkdirSync(`${__dirname}/../public/${post.filename}`, { recursive: true })
+    fs.writeFileSync(`${__dirname}/../public/${post.filename}/index.html`, str)
+  })
+})
