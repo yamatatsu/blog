@@ -31,22 +31,28 @@ const posts = filenames.map<Post>(filename => {
   return { filename: filename.replace(/\.md$/, ""), postHeader, contents }
 })
 
-ejs.renderFile(`${__dirname}/../ejs/index.ejs`, { posts }, (err, str) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-  fs.writeFileSync(`${__dirname}/../public/index.html`, str)
-})
+loadTemplate("index.ejs", { posts })
+  .then(str => {
+    fs.writeFileSync(`${__dirname}/../public/index.html`, str)
+  })
+  .catch(err => console.error(err))
 
 posts.forEach(post => {
-  ejs.renderFile(`${__dirname}/../ejs/post.ejs`, { post }, (err, str) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-
-    fs.mkdirSync(`${__dirname}/../public/${post.filename}`, { recursive: true })
-    fs.writeFileSync(`${__dirname}/../public/${post.filename}/index.html`, str)
-  })
+  loadTemplate("post.ejs", { post })
+    .then(str => {
+      fs.mkdirSync(`${__dirname}/../public/${post.filename}`, {
+        recursive: true,
+      })
+      fs.writeFileSync(
+        `${__dirname}/../public/${post.filename}/index.html`,
+        str
+      )
+    })
+    .catch(err => console.error(err))
 })
+
+function loadTemplate(path: string, data: Record<string, any>) {
+  return ejs.renderFile(`${__dirname}/../ejs/${path}`, data, {
+    root: `${__dirname}/../ejs`,
+  })
+}
