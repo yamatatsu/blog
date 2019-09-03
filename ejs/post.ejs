@@ -4,11 +4,25 @@
 
   <body>
     <main id="content" role="main" class="mt4">
-      <article class="recipe-article">
-        <%- include('_header', {}) %>
-        <section class="px3 mb4">
+      <article class="recipe-article px3">
+        <header class="mb4">
+          <a href="/">
+            <amp-img
+              src="/images/logo.jpg"
+              width="40"
+              height="40"
+              alt="Logo Yamatatsu"
+            ></amp-img>
+          </a>
+          <h1 class="mb1"><%- post.postHeader.title %></h1>
+          <small><%- post.postHeader.date %></small>
+          <hr />
+        </header>
+
+        <section class="mb4">
           <%- post.contents %>
         </section>
+        <hr />
       </article>
     </main>
 
