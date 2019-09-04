@@ -17,19 +17,3 @@ I want taht:
 - Easy to post as Markdown
 
 So I don't use Gatsby. And I use AMP and [remark](https://github.com/remarkjs/remark).
-
-## TODO
-
-- [x] hosting
-- [x] domain
-- [x] generate statics
-- [x] amp
-- [x] post as Markdown
-- [x] remove '.html' from url
-- [x] link to home
-- [x] style as gatsby blog
-- [x] lighthouse
-- [x] ga
-- [x] remove gatsby
-- [x] remove react-amphtml
-- [ ] contents
