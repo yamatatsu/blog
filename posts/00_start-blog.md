@@ -29,7 +29,8 @@ description: "Blogに使った技術とその選定基準の紹介"
 ## react を捨てた理由
 
 - 静的コンテンツ生成に React 使うの意味ないよなー、と
-- [react-amphtml](https://github.com/dfrankland/react-amphtml)を使うに当たり、`dangerouslySetInnerHTML` って 3 回くらい書いたところで決断した
+- [react-amphtml](https://github.com/dfrankland/react-amphtml)を使うに当たり、`dangerouslySetInnerHTML` って 3 回くらい書いて「？？？」ってなるなどした
+- [AMP 公式のテンプレート](https://amp.dev/documentation/templates/)を楽に使いたかった
 
 ## 現在の構成
 
