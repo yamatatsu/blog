@@ -5,9 +5,13 @@ import unified from "unified"
 import parse from "remark-parse"
 import yaml from "js-yaml"
 // @ts-ignore
-import frontmatter from "remark-frontmatter"
+import remarkFrontmatter from "remark-frontmatter"
 // @ts-ignore
 import remarkHtml from "remark-html"
+// @ts-ignore
+import remarkSlug from "remark-slug"
+// @ts-ignore
+import remarkAutolinkHeadings from "remark-autolink-headings"
 
 import { Post } from "./type"
 
@@ -28,7 +32,7 @@ loadTemplate("index.ejs", { posts })
 posts.forEach(post => {
   const dirPath = `${distPath}/${post.filename}`
   fs.promises
-    .mkdir(dirPath)
+    .mkdir(dirPath, { recursive: true })
     .then(() => loadTemplate("post.ejs", { post }))
     .then(str => fs.promises.writeFile(`${dirPath}/index.html`, str))
     .catch(err => console.error(err))
@@ -37,7 +41,7 @@ posts.forEach(post => {
 function getPostHeader(md: string): Record<string, string> {
   const yamlNode = (unified()
     .use(parse)
-    .use(frontmatter)
+    .use(remarkFrontmatter)
     .parse(md) as Parent).children.find(node => node.type === "yaml")
   return yamlNode && yaml.safeLoad(yamlNode.value as string)
 }
@@ -45,7 +49,9 @@ function getPostHeader(md: string): Record<string, string> {
 function getHtml(md: string): string {
   const contents = unified()
     .use(parse)
-    .use(frontmatter)
+    .use(remarkFrontmatter)
+    .use(remarkSlug)
+    .use(remarkAutolinkHeadings)
     .use(remarkHtml)
     .processSync(md).contents as string
   return contents
