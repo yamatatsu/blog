@@ -5,6 +5,8 @@ import unified from "unified"
 import parse from "remark-parse"
 import yaml from "js-yaml"
 // @ts-ignore
+import visit from "unist-util-visit"
+// @ts-ignore
 import remarkFrontmatter from "remark-frontmatter"
 // @ts-ignore
 import remarkHtml from "remark-html"
@@ -52,6 +54,16 @@ function getHtml(md: string): string {
     .use(remarkFrontmatter)
     .use(remarkSlug)
     .use(remarkAutolinkHeadings)
+    // @ts-ignore
+    .use(() => ast => {
+      visit(ast, "paragraph", visitor)
+
+      function visitor(node: Record<string, any>) {
+        const data = node.data || (node.data = {})
+        const props = data.hProperties || (data.hProperties = {})
+        props.className = props.className ? props.className + " mb2" : "mb2"
+      }
+    })
     .use(remarkHtml)
     .processSync(md).contents as string
   return contents

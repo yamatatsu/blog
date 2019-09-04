@@ -24,7 +24,8 @@
     "remark-slug": "^5.1.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.6.2",
-    "unified": "^8.3.2"
+    "unified": "^8.3.2",
+    "unist-util-visit": "^2.0.0"
   },
   "devDependencies": {
     "@types/ejs": "^2.6.3",
