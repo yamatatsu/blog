@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html ⚡>
-  <%- include('_head', {}) %>
+  <head>
+    <title><%= post.postHeader.title %></title>
+    <link
+      rel="canonical"
+      href="http://blog.yamatatsu193.net/<%= post.filename %>"
+    />
+    <%- include('_head', {}) %>
+
+    <script
+      async
+      custom-element="amp-analytics"
+      src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"
+    ></script>
+  </head>
 
   <body>
     <main id="content" role="main" class="mt4">
@@ -14,8 +27,8 @@
               alt="Logo Yamatatsu"
             ></amp-img>
           </a>
-          <h1 class="mb1"><%- post.postHeader.title %></h1>
-          <small><%- post.postHeader.date %></small>
+          <h1 class="mb1"><%= post.postHeader.title %></h1>
+          <small><%= post.postHeader.date %></small>
           <hr />
         </header>
 
