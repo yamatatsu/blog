@@ -26,10 +26,10 @@ So I don't use Gatsby. And I use AMP and [remark](https://github.com/remarkjs/re
 - [x] amp
 - [x] post as Markdown
 - [x] remove '.html' from url
-- [ ] link to home
+- [x] link to home
 - [x] style as gatsby blog
 - [x] lighthouse
-- [ ] ga
+- [x] ga
 - [x] remove gatsby
 - [x] remove react-amphtml
 - [ ] contents
