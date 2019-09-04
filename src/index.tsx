@@ -56,13 +56,8 @@ function getHtml(md: string): string {
     .use(remarkAutolinkHeadings)
     // @ts-ignore
     .use(() => ast => {
-      visit(ast, "paragraph", visitor)
-
-      function visitor(node: Record<string, any>) {
-        const data = node.data || (node.data = {})
-        const props = data.hProperties || (data.hProperties = {})
-        props.className = props.className ? props.className + " mb2" : "mb2"
-      }
+      visit(ast, "heading", addClass("mb2 mt4"))
+      visit(ast, "paragraph", addClass("mb2"))
     })
     .use(remarkHtml)
     .processSync(md).contents as string
@@ -73,4 +68,14 @@ function loadTemplate(path: string, data: Record<string, any>) {
   return ejs.renderFile(`${__dirname}/../ejs/${path}`, data, {
     root: `${__dirname}/../ejs`,
   })
+}
+
+function addClass(className: string) {
+  return (node: Record<string, any>) => {
+    const data = node.data || (node.data = {})
+    const props = data.hProperties || (data.hProperties = {})
+    props.className = props.className
+      ? `${props.className} ${className}`
+      : className
+  }
 }
