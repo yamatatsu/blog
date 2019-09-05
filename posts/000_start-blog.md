@@ -10,7 +10,9 @@ description: "Blogに使った技術とその選定基準の紹介"
 
 ## TL;DR
 
-[remark](https://github.com/remarkjs/remark)と[ejs](https://github.com/mde/ejs)で作った
+- AMPを使いたかった
+- Markdownで書きたかった
+- [remark](https://github.com/remarkjs/remark)と[ejs](https://github.com/mde/ejs)で作った
 
 ## 歴史
 
@@ -22,13 +24,14 @@ description: "Blogに使った技術とその選定基準の紹介"
 
 ## Gatsby を捨てた理由
 
+- AMPと相性が悪かった
 - たかが Blog が SPA で出来上がることに違和感があった
 - Gatsby は AMP であっても問答無用で SPA 用の js を取ってこようとするので邪魔
   - 生成された html から script タグ消せばできそうだけど、そもそもいらんよな？ってなった
 
 ## react を捨てた理由
 
-- 静的コンテンツ生成に React 使うの意味ないよなー、と
+- 静的コンテンツ生成のみのために React 使うの意味ないよなー、と
 - [react-amphtml](https://github.com/dfrankland/react-amphtml)を使うに当たり、`dangerouslySetInnerHTML` って 3 回くらい書いて「？？？」ってなるなどした
 - [AMP 公式のテンプレート](https://amp.dev/documentation/templates/)を楽に使いたかった
 
