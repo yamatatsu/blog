@@ -144,6 +144,9 @@ Characteristics:
 
 ##### Reference Architecture
 
+![fig1](./fig1.png)
+Figure 1: Reference architecture for RESTful microservices
+
 1. **Customers** leverage your microservices by making API (that is, HTTP) calls. Ideally, your consumers should have a tightly bound service contract to your API in order to achieve consistent expectations of service levels and change control.
 2. **Amazon API Gateway** hosts RESTful HTTP requests and responses to customers. In this scenario, API Gateway provides built-in authorization, throttling, security, fault tolerance, request/response mapping, and performance optimizations.
 3. **AWS Lambda** contains the business logic to process incoming API calls and leverage DynamoDB as a persistent storage.
@@ -163,6 +166,9 @@ This model provides a framework that is easy to deploy and maintain and a secure
 The Alexa Skills Kit (ASK) gives developers the ability to extend Alexa's capabilities by building natural, engaging voice and visual experiences. Successful skills are habit-forming—users routinely come back because they not only offer something unique, but also delivers value in new, novel, and frictionless ways.
 
 The biggest cause of frustration from Alexa users is when a skill doesn’t act how they expect and it takes multiple interactions to accomplish what they want. It’s essential to design your voice interaction model first and then working backwards from there, since some users might say too little, too much, or say something that you weren’t expecting. The voice design process involves ideating, scripting, and planning for expected as well as unexpected utterances.
+
+![fig2](./fig2.png)
+Figure 2: Alexa skill example design script
 
 With a basic script in mind, keep the following techniques in mind as you start building a skill:
 
@@ -185,6 +191,9 @@ Characteristics:
 - You want elasticity that scales up and down to meet the demands of users and handles unexpected usage patterns.
 
 ##### Reference Architecture
+
+![fig3](./fig3.png)
+Figure 3: Reference architecture for an Alexa skill
 
 1. **Alexa users** interact with Alexa skills by speaking to Alexa-enabled devices. Voice is the primary method of interaction.
 2. **Alexa-enabled devices** listen and activate when requested to do so, such as upon recognizing a wake word.
@@ -230,6 +239,9 @@ Building a serverless mobile backend on AWS enables you to provide these capabil
 
 Characteristics:
 
+![fig4](./fig4.png)
+Figure 4: Reference architecture for a mobile backend
+
 - You want to control application data behavior from the client and explicitly select what data you want from the API
 - You want your business logic to be decoupled from your mobile application as much as possible.
 - You are looking to provide business functionalities as an API to optimize development across multiple platforms.
@@ -273,7 +285,11 @@ Characteristics:
 - You want to use the Amazon Kinesis Producer Library (KPL) to take care of data ingestion from a data producer-perspective.
 
 ##### Reference Architecture
+
 Here we are presenting a scenario for common stream processing, which is a reference architecture for analyzing social media data.
+
+![fig5](fig5.png)
+Figure 5: Reference architecture for stream processing
 
 1. **Data producers** use the Amazon Kinesis Producer Library (KPL) to send social media streaming data to a Kinesis stream. Amazon Kinesis Agent and custom data producers that leverage the Kinesis API can also be used.
 1. An **Amazon Kinesis stream** collects, processes, and analyzes real-time streaming data produced by data producers. Data ingested into the stream can be processed by a consumer, which, in this case, is Lambda.
@@ -305,6 +321,9 @@ Characteristics:
 - You want to create a framework that is easy to set up and operate, and that you can extend with limited impact later.
 
 ##### Reference Architecture
+
+![](fig6.png)
+Figure 6: Reference architecture for a web application
 
 1. **Consumers** of this web application may be geographically concentrated or worldwide. Leveraging Amazon CloudFront not only provides a better performance experience for these consumers through caching and optimal origin routing, but limits redundant calls to your backend.
 1. **Amazon S3** hosts web application static assets and is securely served through CloudFront.
@@ -354,13 +373,22 @@ Making changes to your serverless application entails many of the principles of 
 
 Active tracing with AWS X-Ray should be enabled to provide distributed tracing capabilities as well as to enable visual service maps for faster troubleshooting. X-Ray helps you identify performance degradation and quickly understand anomalies including latency distributions.
 
+![fig7](fig7.png)
+Figure 7: AWS X-Ray Service Map visualizing 2 services
+
 Service Maps are also helpful to understand integration points that need attention and resiliency practices. For integration calls, retries, backoffs and possibly circuit breakers are necessary to avoid faults to propagate to downstream services. Another example is networking anomalies, you should not rely on default timeouts and retry settings but tune them to fail fast should a socket read/write timeout happens where the default can be seconds if not minutes in certain clients.
 
 X-Ray also provides two powerful features that can improve the efficiency on identifying anomalies within applications: Sub-segments and Annotations.
 
+![fig8](fig8.png)
+Figure 8: AWS X-Ray Trace with sub-segments beginning with ##
+
 Sub-segments are helpful to understand how operations and logic on a given application breaks down, for example, you can create a sub-segment for the entire Lambda function handler and one for each additional function (sync or async) to understand their overhead in a top-down manner.
 
 Annotations are key-value pairs with string, number, or Boolean values that are automatically indexed by AWS X-Ray. Traces can then be grouped by Annotations and aid on quickly identifying performance stats on application specific operations, for example, how long it takes to query a database, how long it takes to process pictures with large crowds, how many retries it took to succeed or what is the processing time per file/event/operation.
+
+![](fig9.png)
+Figure 9: AWS X-Ray Traces grouped by custom annotations
 
 Alarms should be configured at both individual and aggregated levels. Aggregate-level examples include alarming but not limited to the following metrics:
 
@@ -392,7 +420,13 @@ Below are guidelines that can be used whether you are creating a dashboard or lo
 
 Firstly, favor separate API Gateway endpoints, Lambda functions, Step Functions state machines as well as resources that make up the service for each stage over aliases and versions alone. Leverage Lambda versions and aliases to determine LIVE from $LATEST. For example, a CI/CD pipeline Beta stage can create the following resources in a Beta AWS Account and equally for the respective stages you may want to have in different accounts too (Gamma, Dev, Prod): OrderAPIBeta, OrderServiceBeta, OrderStateMachineWorkflowBeta, OrderBucketBeta, OrderTableBeta.
 
+![](fig10.png)
+Figure 10: CI/CD Pipeline for multiple accounts
+
 Secondly, favor safer types of deployments over all-at-once deployments for production systems as new changes will gradually shift towards the end user over time be that a Canary or Linear deployment. Use CodeDeploy Hooks (BeforeAllowTraffic, AfterAllowTraffic) and the Alarms feature to gain more control over deployment validation, rollback, and any customization you may need to your application.
+
+![](fig11.png)
+Figure 11: AWS CodeDeploy Lambda deployment and Hooks
 
 Use AWS SAM to package, deploy, and model serverless applications. SAM CLI can also enable faster debugging cycles when developing Lambda functions locally. Additionally, there are a number of third-party serverless frameworks that can be used to package, deploy, and manage serverless solutions on AWS.
 
@@ -470,11 +504,20 @@ Primarily, you want to understand if, and how, any of these mechanisms are imple
 
 Below is a diagram illustrating AWS_IAM authorization in this context:
 
+![](fig10-dep.png)
+Figure 10: AWS_IAM authorization
+
 For customers who currently have an existing Identity Provider (IdP), you can leverage an API Gateway Lambda authorizer to invoke a Lambda function to authenticate/validate a given user against your IdP. That is also commonly used when you want to perform additional logic on top of an existing IdP. A Lambda authorizer can send additional information derived from bearer token or request context values to your backend service. For example, the authorizer can return a map containing user-ids, user-names, and scope. By using Lambda authorizers, your backend does not require the capability to map authorization tokens to user-centric data, allowing you to limit the exposure of such information to just the authorization function.
+
+![](fig13.png)
+Figure 12: API Gateway Lambda authorizer
 
 For customers who don’t have an IdP, you can leverage Amazon Cognito user pools to either provide built-in user management or integrate with external identity providers such as Facebook, Twitter, Google+, and Amazon.
 
 This is commonly seen in the mobile backend scenario, where users authenticate by using existing accounts in social media platforms while being able to register/sign in with their email address/username. This approach also provides granular authorization through [OAuth Scopes](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-enable-cognito-user-pool.html).
+
+![](fig13.png)
+Figure 13: Amazon Cognito user pools
 
 The API Gateway API Keys feature is not a security mechanism and should not be used for authorization. It should be used primarily to track a consumer's usage across your API and could be used in addition to the authorizers previously mentioned in this section.
 
@@ -486,6 +529,9 @@ Amazon API Gateway resource policies are JSON policy documents that can be attac
 - Specified source IP address ranges or CIDR blocks
 - Specified virtual private clouds (VPCs) or VPC endpoints (in any account)
 
+![](fig14.png)
+Figure 14: Amazon API Gateway Resource Policy based on IP CIDR
+
 With resource policies, you can implement common scenarios such as allowing requests to come only from known clients with a specific IP range or from another AWS Account.
 
 If you plan to restrict access coming from private IP addresses, use the API Gateway private endpoints feature instead. With private endpoints, API Gateway can restrict access to services and resources inside your VPC, or those connected via Direct Connect, to your own data centers.
@@ -493,6 +539,9 @@ If you plan to restrict access coming from private IP addresses, use the API Gat
 Combining both private endpoints and resource policies, an API can be limited to specific resource invocations within a specific private IP range. This combination is mostly used on internal microservices where they might be in the same or another account.
 
 When it comes to large deployments and multiple AWS accounts, organizations can leverage API Gateway Authorizers Cross-Account to ease maintenance and centralize security practices. For example, API Gateway has the ability to use Cognito User Pools in a separate account. Lambda Authorizers can also be created and managed in a separate account and then reused across multiple APIs managed by API Gateway. Both scenarios are common for deployments with multiple microservices that are looking to standardize authorization practices across APIs.
+
+![](fig15.png)
+Figure 15: API Gateway Cross-Account Authorizers
 
 > SERVSEC 2: How are you enforcing boundaries as to what AWS services your Lambda functions can access?
 
@@ -632,6 +681,9 @@ As discussed in the security pillar, API keys are not a security mechanism to au
 
 Concurrency controls are sometimes necessary to protect specific workloads against service failure as they may not scale as rapidly as Lambda. [Concurrency controls](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html) enable you to control the allocation of how many concurrent invocations of a particular Lambda function and are set at the individual Lambda function level. Lambda invocations that exceed concurrency set to an individual function will be throttled by the AWS Lambda Service and the result will vary depending on their event source – Synchronous invocations return HTTP 429 error, Asynchronous invocations will be queued and retried while Stream-based event sources will retry up to their record expiration time.
 
+![](fig16.png)
+Figure 16: AWS Lambda concurrency controls
+
 Controlling concurrency is particularly useful for the following scenarios:
 
 - Sensitive backend or integrated systems that may have scaling limitations
@@ -700,6 +752,9 @@ Whenever possible, Step Functions should be used to minimize the amount of custo
 Moreover, non-atomic operations such as PutRecords (Kinesis) and BatchWriteItem (DynamoDB) can return successful in the event of a partial failure. Therefore, the response should be inspected at all times when using such operations and programmatically dealt with.
 
 For synchronous parts that are transaction-based and depend on certain guarantees and requirements, rolling back failed transactions as described by the [Saga pattern](http://theburningmonk.com/2017/07/applying-the-saga-pattern-with-aws-lambda-and-step-functions/) can also be achieved by using Step Functions state machines, which will decouple and simplify the logic of your application.
+
+![](fig17.png)
+Figure 17: Saga pattern in Step Functions by Yan Cui
 
 #### Key AWS Services
 Key AWS services for reliability are AWS Marketplace, Trusted Advisor, CloudWatch Logs, CloudWatch, API Gateway, Lambda, X-ray, Step Functions, Amazon SQS, and Amazon SNS.
@@ -787,7 +842,13 @@ If your Lambda function needs access to the VPC and to the internet, you’ll ne
 
 As regards to API Gateway, you can choose from two types of API endpoints when creating REST APIs and custom domains with API Gateway – Edge optimized and Regional Endpoint APIs: 
 
+![](fig18.png)
+Figure 18: Edge-optimized API Gateway deployment
+
 Edge-optimized APIs are endpoints that are accessed through a CloudFront distribution that is created and managed by API Gateway. API requests are routed to the nearest CloudFront Point of Presence (POP) which typically improves connection time for geographically diverse clients. An API is edge - optimized if you do not explicitly specify its endpoint type when creating the API.
+
+![](fig19.png)
+Figure 19: Regional Endpoint API Gateway deployment
 
 Regional API is the system-default option for creating APIs with API Gateway. A Regional API endpoint is accessed from the same AWS region in which your REST API is deployed. This helps you reduce request latency when API requests originate from the same region as your REST API. Additionally, you can choose to associate your own Amazon CloudFront distribution with the regional API  endpoint. For in-region requests, a regional endpoint bypasses the unnecessary round trip to a CloudFront distribution.
 
@@ -802,6 +863,9 @@ The table below can help you decide whether to deploy and Edge-optimized API or 
 > SERVPER 3: How do you decide what components of your serverless application should be deployed in a VPC?
 
 The decision tree below can help you decide whether to deploy your Lambda function in a VPC.
+
+![](fig20.png)
+Figure 20: Decision tree for deploying a Lambda function in a VPC
 
 > SERVPER 4: How are you optimizing your Lambda code for performance?
 
@@ -836,6 +900,9 @@ In a Serverless Data Processing workflow, data is ingested from clients into Kin
 
 As you may have different transformations for different data types, we recommend granularly splitting the transformations into different Lambda functions for optimal performance. With this approach, you have the flexibility to run data transformation in parallel and gain speed as well as reduce cost.
 
+![](fig21.png)
+Figure 21: Asynchronous data ingestion
+
 Kinesis Data Firehose also offers native [data transformations](https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html) that may be helpful for certain use cases as it removes the need for a subsequent Lambda function under certain common scenarios such as transformations: Apache Log/System logs to CSV, JSON; JSON to Parquet or ORC. An exception to the rule would be when you want to partition the data for optimal storage and querying formats for Athena or Redshift spectrum.
 
 ##### Serverless Event Submission with Status Updates
@@ -845,9 +912,15 @@ The processes required to complete this common transaction may require multiple 
 
 For long and complex workflows similar to this you can use API Gateway in front of Step Functions that upon new authorized requests will kick off this business workflow.
 
+![](fig22.png)
+Figure 22: Asynchronous workflow with Step functions state machines
+
 As Step Functions kicks off the execution of a state machine it immediately returns a response (Execution ID) to API Gateway and consequently to the caller (Mobile App, SDK, Web service, etc.). With such response, you can reactively provide feedback to the user by querying Step Functions web service as to how the workflow is progressing.
 
 Alternatively, you might need to do some data transformation before kicking off such workflow or other scenarios where you may want to acknowledge the incoming request and store the event into a queue before this workflow begins.
+
+![](fig23.png)
+Figure 23: Asynchronous workflow using a queue as a scaling layer
 
 In this scenario, API Gateway returns a response to client containing a request ID that can be tracked by the client later. Alternatively, you can also use a Lambda function to generate a distinct request ID back to the client after inserting to the queue.
 
@@ -862,9 +935,18 @@ In both of these examples, the best practice is to pursue an asynchronous workfl
 
 As regards to Web Sockets, AWS AppSync provides that capability out of the box. The client could open a web socket and use GraphQL Subscriptions (listen to mutation calls through AppSync). This is ideal for data that is streaming or may yield more than a single response. With AppSync, as status updates change in DynamoDB, clients can automatically subscribe and receive updates as they occur and it’s the perfect pattern for when Data drives the User Interface.
 
+![](fig24.png)
+Figure 24: Asynchronous updates via Websockets with AppSync and GraphQL
+
 As regards to Web Hooks, with SNS Topic subscriptions, clients can host an HTTP endpoint that can notify them upon an event (e.g. data file arriving in S3). Through this webhook pattern, when a message is published to the topic upon an event SNS will deliver the event to another HTTP(s) Endpoint via POST. This pattern is ideal when the clients are configurable such as another microservice, which could host an endpoint.
 
+![](fig25.png)
+Figure 25: Asynchronous notification via Webhook with SNS
+
 Lastly, with Polling, clients constantly polling an API for status could be costly at scale from both cost-perspective and the resources hosting the service. If polling is the only option due to environment constraints, it’s a best practice to establish SLAs with the clients to limit the number of ‘empty polls’.
+
+![](fig26.png)
+Figure 26: Client polling for updates on transaction recently made
 
 For example, if a large data warehouse query takes an average of 2 minutes for a response, the client should poll the API after 2 minutes with exponential backoff if the data is not available. There are 2 common patterns to ensure that clients aren’t polling more frequently than expected: Throttling and Timestamp for when is safe to poll again.
 
@@ -977,21 +1059,36 @@ Most serverless architectures use API Gateway as the entry point for final users
 
 These are some of the approaches that could be considered here:
 
+![](fig27.png)
+Figure 27: Sending data to Amazon S3 using Kinesis Firehose
+
 In this scenario, API Gateway will execute a Lambda function that will pass the data to Kinesis Firehose and further on to Amazon S3. Here the cost comes from all of these services.
 
 However, a different approach could be:
+
+![](fig28.png)
+Figure 28: Reducing cost of sending data to Amazon S3 by implementing AWS service proxy
 
 With this approach, we remove the cost of using Lambda and unnecessary invocations by implementing the AWS Service Proxy Feature within API Gateway. However, this might introduce some extra complexity when dealing with other services such as Kinesis since, for example, we need to define shards for ingestion within each call.
 
 We can also stream data directly from the client using the Kinesis Firehose SDK into an S3 bucket, thereby removing the costs associated with API Gateway and AWS Lambda and simplify our architecture altogether.
 
+![](fig29.png)
+Figure 29: Reducing cost of sending data to Amazon S3 by streaming directly using the Kinesis Firehose SDK
+
 Surely, with this implementation we won’t benefit from using the RESTful API on our application but will reduce our costs and even the latency of our streams. Depending on the specific use case, one or another of these approaches might fit your workload.
 
 There are scenarios where you need to talk to a private endpoint/resource that may be in a VPC or on-premises. If a request does not need any transformations: such as additional headers, parameters or payload, you can use the API Gateway private integration feature instead of using a Lambda function as a proxy to private calls.
 
+![](fig30.png)
+Figure 30: Amazon API Gateway Private Integrations feature over Lambda in VPC to access private resources
+
 With this approach, API Gateway sends incoming requests to an internal network load balancer in your VPC which can forward the traffic to any backend— either in the same VPC or on-premises using an IP address. This has both cost and performance benefits as you essentially don’t need an additional hop to send requests to a private backend with the added benefits of authorization, throttling, and caching mechanisms API Gateway provides without requiring a Lambda function to proxy such request.
 
 Amazon SNS can be used to trigger an AWS Lambda function in response to published topic messages. Since Amazon SNS publishes messages to all topic subscribers, you can optimize subscriber-relevancy and AWS Lambda usage through [SNS Filtering capabilities](https://docs.aws.amazon.com/sns/latest/dg/message-filtering.html). This enables you to apply policies to ensure subscriber notifications are sent only when the event needs to be handled. This approach avoids broadcasting all messages to all subscribers unnecessarily. This reduces the cost of your infrastructure since the logic behind this filtering is no longer within the Lambda function code.
+
+![](fig31.png)
+Figure 31: Amazon SNS with Message Atribute Filtering
 
 > SERVCOST 4: How are you optimizing your Lambda functions to reduce overall execution time?
 
@@ -999,17 +1096,29 @@ Some of the workloads our customers implement in their serverless architectures 
 
 With this pattern, instead of having your Lambda function waiting a specific amount of time for a resource to become available, which will incur charges and waste resources when sitting idle, you can reduce costs by implementing this wait with Step Functions. For example, in the image below, we poll an AWS Batch job and review its state every 30 s to see if it has finished. Instead of coding this wait within the Lambda function, we implement a poll (GetJobStatus) + wait (Wait30Seconds) + decider (CheckJobStatus).
 
+![](fig32.png)
+Figure 32: Implementing a wait state with AWS Step Functions
+
 Implementing a wait state with Step Functions won’t incur any further cost as the pricing model for Step Functions is based on transitions between states and not on time within a state.
 
 Finally, optimizing your code in order to reduce the execution time will decrease the cost per execution of your Lambda functions. The use of global variables to maintain connections to your data stores or other services/resources will increase performance and reduce execution time, which also reduce the cost. For more information, see the performance pillar section.
 
 Additionally, when retrieving objects from Amazon S3, using other features or services could reduce both the amount of memory that the Lambda function needs and the overall execution time. Using Athena SQL queries to gather granular information needed for your execution reduces the retrieval time and object size on which perform transformations. 
 
+![](fig33.png)
+Figure 33: Lambda function retrieving full S3 object
+
 In the above diagram, we can see that, when retrieving large objects from Amazon S3, we might increase the memory consumption of the Lambda, which increases the execution time (so the function can transform, iterate or collect required data) and, in some case, only part of this information is actually needed. This is represented with 3 columns in red (data not required) and one column in green (data required).
+
+![](fig34.png)
+Figure 34: Lambda with Athena object retrieval
 
 In the next diagram, we can see that, by querying Athena to get the specific data, we reduce the size of the object retrieved and, as an extra benefit, we can reuse that content since Athena saves its query results in a S3 bucket and invoke the Lambda invocation as the results land in Amazon S3 asynchronously.
 
 A similar approach could be using with S3 Select. S3 select enables applications to retrieve only a subset of data from an object by using simple SQL expressions. As in previous example with Athena, retrieving a smaller object from Amazon S3 reduces execution time and memory utilized by the Lambda function.
+
+![](fig35.png)
+Figure 35: Lambda perf stats using S3 vs S3 Select
 
 Finally, in order to reduce both the time clients take to receive data from your API Gateway and reduce the cost on API responses, it is recommended to enable [Payload Compression](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/api-gateway-gzip-compression-decompression.html) for API responses in your API Gateway.
 
