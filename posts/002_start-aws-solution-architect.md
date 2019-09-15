@@ -13,3 +13,5 @@ description: AWSソリューションアーキテクトの勉強を始めてみ�
 [徹底攻略 AWS認定 ソリューションアーキテクト アソシエイト教科書　（徹底攻略シリーズ）](https://books.rakuten.co.jp/rk/eb05742b767a3ecaa2d3de47c2b28c61/?scid=me_ich_conf_order_03&_mpt=101&_mpe=278256-20190913-07540743)
 
 [AWS Well-Architected](https://aws.amazon.com/jp/architecture/well-architected/)
+
+[AWS-Serverless-Applications-Lens](https://d1.awsstatic.com/whitepapers/architecture/AWS-Serverless-Applications-Lens.pdf)
