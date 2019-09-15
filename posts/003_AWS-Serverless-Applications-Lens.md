@@ -7,23 +7,23 @@ description: AWS-Serverless-Applications-Lensの内容
 https://d1.awsstatic.com/whitepapers/architecture/AWS-Serverless-Applications-Lens.pdf
 
 Serverless Applications Lens
-AWS Well-Architected Framework
+[AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/)
 
 ## Notices
 This document is provided for informational purposes only. It represents AWS's current product offerings and practices as of the date of issue of this document, which are subject to change without notice. Customers are responsible for making their own independent assessment of the information in this document and any use of AWS's products or services, each of which is provided "as is" without warranty of any kind, whether express or implied. This document does not create any warranties, representations, contractual commitments, conditions or assurances from AWS, its affiliates, suppliers or licensors. The responsibilities and liabilities of AWS to its customers are controlled by AWS agreements, and this document is not part of, nor does it modify, any agreement between AWS and its customers.
 
 ## Abstract
-This document describes the Serverless Applications Lens for the AWS Well-Architected Framework. The document covers common serverless applications scenarios and identifies key elements to ensure your workloads are architected according to best practices.
+This document describes the **Serverless Applications Lens** for the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/). The document covers common serverless applications scenarios and identifies key elements to ensure your workloads are architected according to best practices.
 
 ## Introduction
-The AWS Well-Architected Framework helps you understand the pros and cons of decisions you make while building systems on AWS.1 By using the Framework you will learn architectural best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. It provides a way for you to consistently measure your architectures against best practices and identify areas for improvement. We believe that having well-architected systems greatly increases the likelihood of business success.
+The [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) helps you understand the pros and cons of decisions you make while building systems on AWS.1 By using the Framework you will learn architectural best practices for designing and operating reliable, secure, efficient, and cost-effective systems in the cloud. It provides a way for you to consistently measure your architectures against best practices and identify areas for improvement. We believe that having well-architected systems greatly increases the likelihood of business success.
 
-In this "Lens" we focus on how to design, deploy, and architect your serverless application workloads on the AWS Cloud. For brevity, we have only covered details from the Well-Architected Framework that are specific to serverless workloads. You should still consider best practices and questions that have not been included in this document when designing your architecture. We recommend that you read the AWS Well-Architected Framework whitepaper.2
+In this "Lens" we focus on how to design, deploy, and architect your **serverless application workloads** on the AWS Cloud. For brevity, we have only covered details from the Well-Architected Framework that are specific to serverless workloads. You should still consider best practices and questions that have not been included in this document when designing your architecture. We recommend that you read the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) whitepaper.
 
 This document is intended for those in technology roles, such as chief technology officers (CTOs), architects, developers, and operations team members. After reading this document, you will understand AWS best practices and strategies to use when designing architectures for serverless applications.
 
 ## Definitions
-The AWS Well-Architected Framework is based on five pillars: operational excellence, security, reliability, performance efficiency, and cost optimization. For serverless workloads AWS provides multiple core components (serverless and non-serverless) that allow you to design robust architectures for your serverless applications. In this section, we will present an overview of the services that will be used throughout this document. There are six areas that - you should consider when building a serverless workload:
+The [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) is based on five pillars: operational excellence, security, reliability, performance efficiency, and cost optimization. For serverless workloads AWS provides multiple core components (serverless and non-serverless) that allow you to design robust architectures for your serverless applications. In this section, we will present an overview of the services that will be used throughout this document. There are six areas that - you should consider when building a serverless workload:
 
 - Compute layer
 - Data layer
@@ -37,45 +37,45 @@ The AWS Well-Architected Framework is based on five pillars: operational excelle
 
 The compute layer of your workload manages requests from external systems, controlling access and ensuring requests are appropriately authorized. It contains the runtime environment that your business logic will be deployed and executed by.
 
-AWS Lambda lets you run stateless serverless applications on a managed platform that supports microservices architectures, deployment, and management of execution at the function layer.
+**AWS Lambda** lets you run stateless serverless applications on a managed platform that supports microservices architectures, deployment, and management of execution at the function layer.
 
-With Amazon API Gateway, you can run a fully managed REST API that integrates with Lambda to execute your business logic and includes traffic management, authorization and access control, monitoring, and API versioning.
+With **Amazon API Gateway**, you can run a fully managed REST API that integrates with Lambda to execute your business logic and includes traffic management, authorization and access control, monitoring, and API versioning.
 
-AWS Step Functions orchestrates serverless workflows including coordination, state, and function chaining as well as combining long-running executions not supported within Lambda execution limits by breaking into multiple steps or by calling workers running on Amazon Elastic Compute Cloud (Amazon EC2) instances or on-premises.
+**AWS Step Functions** orchestrates serverless workflows including coordination, state, and function chaining as well as combining long-running executions not supported within Lambda execution limits by breaking into multiple steps or by calling workers running on Amazon Elastic Compute Cloud (Amazon EC2) instances or on-premises.
 
 ### Data Layer
 The data layer of your workload manages persistent storage from within a system. It provides a secure mechanism to store states that your business logic will need. It provides a mechanism to trigger events in response to data changes.
 
-Amazon DynamoDB helps you build serverless applications by providing a managed NoSQL database for persistent storage. Combined with DynamoDB Streams you can respond in near real-time to changes in your DynamoDB table by invoking Lambda functions. DynamoDB Accelerator (DAX) adds a highly available in-memory cache for DynamoDB that delivers up to 10x performance improvement from milliseconds to microseconds.
+**Amazon DynamoDB** helps you build serverless applications by providing a managed NoSQL database for persistent storage. Combined with **DynamoDB Streams** you can respond in near real-time to changes in your DynamoDB table by invoking Lambda functions. **DynamoDB Accelerator** (DAX) adds a highly available in-memory cache for DynamoDB that delivers up to 10x performance improvement from milliseconds to microseconds.
 
-With Amazon Simple Storage Service (Amazon S3), you can build serverless web applications and websites by providing a highly available key-value store, from which static assets can be served via a Content Delivery Network (CDN), such as Amazon CloudFront.
+With **Amazon Simple Storage Service** (Amazon S3), you can build serverless web applications and websites by providing a highly available key-value store, from which static assets can be served via a Content Delivery Network (CDN), such as Amazon CloudFront.
 
-Amazon Elasticsearch Service (Amazon ES) makes it easy to deploy, secure, operate, and scale Elasticsearch for log analytics, full-text search, application monitoring, and more. Amazon ES is a fully managed service that provides both a search engine and analytics tools.
+**Amazon Elasticsearch Service** (Amazon ES) makes it easy to deploy, secure, operate, and scale Elasticsearch for log analytics, full-text search, application monitoring, and more. Amazon ES is a fully managed service that provides both a search engine and analytics tools.
 
-AWS AppSync is a managed GraphQL service with enterprise grade security controls, as well as real-time and offline capabilities which make developing applications simple. AWS AppSync provides a data-driven API and a consistent programming language for applications and devices to connect to services such as DynamoDB, Amazon ES, and Amazon S3.
+**AWS AppSync** is a managed GraphQL service with enterprise grade security controls, as well as real-time and offline capabilities which make developing applications simple. AWS AppSync provides a data-driven API and a consistent programming language for applications and devices to connect to services such as DynamoDB, Amazon ES, and Amazon S3.
 
 ### Messaging and Streaming Layer
 The messaging layer of your workload manages communications between components. The streaming layer manages real-time analysis and processing of streaming data.
 
-Amazon Simple Notification Service (Amazon SNS) provides a fully managed messaging service for pub/sub patterns using asynchronous event notifications and mobile push notifications for microservices, distributed systems, and serverless applications.
+**Amazon Simple Notification Service** (Amazon SNS) provides a fully managed messaging service for pub/sub patterns using asynchronous event notifications and mobile push notifications for microservices, distributed systems, and serverless applications.
 
-Amazon Kinesis makes it easy to collect, process, and analyze real-time streaming data. With Amazon Kinesis Data Analytics, you can run standard SQL or build entire streaming applications using SQL.
+**Amazon Kinesis** makes it easy to collect, process, and analyze real-time streaming data. With **Amazon Kinesis Data Analytics**, you can run standard SQL or build entire streaming applications using SQL.
 
-Amazon Kinesis Data Firehose captures, transforms, and loads streaming data into Kinesis Analytics, Amazon S3, Amazon Redshift, and Amazon ES, enabling near real-time analytics with existing business intelligence tools.
+**Amazon Kinesis Data Firehose** captures, transforms, and loads streaming data into Kinesis Analytics, Amazon S3, Amazon Redshift, and Amazon ES, enabling near real-time analytics with existing business intelligence tools.
 
 ### User Management and Identity Layer
 The user management and identity layer of your workload provides identity, authentication, and authorization for both external and internal customers of your workload’s interfaces.
 
-With Amazon Cognito, you can easily add user sign-up, sign-in, and data synchronization to serverless applications. Amazon Cognito user pools provide built-in sign-in screens and federation with Facebook, Google, Amazon, and Security Assertion Markup Language (SAML). Amazon Cognito Federated Identities lets you securely provide scoped access to AWS resources that are part of your serverless architecture.
+With **Amazon Cognito**, you can easily add user sign-up, sign-in, and data synchronization to serverless applications. **Amazon Cognito** user pools provide built-in sign-in screens and federation with Facebook, Google, Amazon, and Security Assertion Markup Language (SAML). **Amazon Cognito** Federated Identities lets you securely provide scoped access to AWS resources that are part of your serverless architecture.
 
 ### Systems Monitoring and Deployment
 The system monitoring layer of your workload manages system visibility through metrics and creates contextual awareness of how it operates and behaves over time. The deployment layer defines how your workload changes are promoted through a release management process.
 
-With Amazon CloudWatch, you can access system metrics on all the AWS services you use, consolidate system and application level logs, and create business key performance indicators (KPIs) as custom metrics for your specific needs. It provides dashboards and alerts that can trigger automated actions on the platform.
+With **Amazon CloudWatch**, you can access system metrics on all the AWS services you use, consolidate system and application level logs, and create business key performance indicators (KPIs) as custom metrics for your specific needs. It provides dashboards and alerts that can trigger automated actions on the platform.
 
-AWS X-Ray lets you analyze and debug serverless applications by providing distributed tracing and service maps to easily identify performance bottlenecks by visualizing a request end-to-end.
+**AWS X-Ray** lets you analyze and debug serverless applications by providing distributed tracing and service maps to easily identify performance bottlenecks by visualizing a request end-to-end.
 
-AWS Serverless Application Model (AWS SAM) is an extension of AWS CloudFormation that is used to package, test, and deploy serverless applications. SAM CLI can also enable faster debugging cycles when developing Lambda functions locally.
+**AWS Serverless Application Model** (AWS SAM) is an extension of AWS CloudFormation that is used to package, test, and deploy serverless applications. SAM CLI can also enable faster debugging cycles when developing Lambda functions locally.
 
 ### Deployment approaches
 A best practice for deployments in a Microservice architecture is to ensure that a change does not break the service contract of the consumer. If the API owner  makes a breaking change to the service contract and the consumer is not ready for it, failures can occur.
@@ -87,6 +87,7 @@ Some customers who want to take a risk-adverse approach to breaking changes may 
 The table shows the different approaches to deployment:
 
 | Deployment | Consumer Impact | Rollback | Event Model Factors | Deployment Speed |
+| --- | --- | --- | --- | --- |
 | All at once | All at once | Redeploy older version | Any event model at low concurrency rate | Immediate |
 | Blue/Green | All at once with some level of production environment testing beforehand | Revert traffic to previous environment (e.g. Blue) | Better for asynchronous and synchronous event models at medium concurrency workloads | Minutes to hours of validation and then immediate to customers |
 | Canaries/Linear | 1-10% typical initial traffic shift, then phased increases or all at once | Revert 100% of traffic to previous deployment | Better for high concurrency workloads | Minutes to hours |
@@ -116,18 +117,18 @@ To simplify deployment operations and reduce the risk of error, Lambda aliases e
 ### Edge Layer
 The edge layer of your workload manages the presentation layer and connectivity to external customers. It provides an efficient delivery method to external customers residing in distinct geographical locations.
 
-CloudFront provides a CDN that securely delivers web application content and data with low latency and high transfer speeds.
+**CloudFront** provides a CDN that securely delivers web application content and data with low latency and high transfer speeds.
 
 ## General Design Principles
 The Well-Architected Framework identifies a set of general design principles to facilitate good design in the cloud for serverless applications:
 
-- Speedy, simple, singular: Functions are concise, short, single purpose and their environment may live up to their request lifecycle. Transactions are efficiently cost aware and thus faster executions are preferred.
-- For Scalability, Think concurrent requests: Serverless applications take advantage of the concurrency model, and tradeoffs at the design level are evaluated based on concurrency.
-- Share nothing: Function runtime environment and underlying infrastructure are short-lived, therefore local resources such as temporary storage are not guaranteed. State can be manipulated within a state machine execution lifecycle, and persistent storage is preferred for highly durable requirements.
-- Assume no hardware affinity: Underlying infrastructure may change. Leverage code or dependencies that are hardware-agnostic as CPU flags, for example, may not be available consistently.
-- Orchestrate multiple functions of your application with state machines: Chaining Lambda executions within the code to orchestrate the workflow of your application results in a monolithic and tightly coupled application. Instead, use a state machine to orchestrate transactions and communication flows.
-- Use events to trigger transactions: Events such as writing a new Amazon S3 object or an update to a database allow for transaction execution in response to business functionalities. This asynchronous event behavior is often consumer agnostic and drives just-in-time processing to ensure lean service design.
-- Design for failures and duplicates: Operations triggered from requests/events must be idempotent as failures can occur and a given request/event can be delivered more than once. Include appropriate retries for downstream calls.
+- **Speedy, simple, singular**: Functions are concise, short, single purpose and their environment may live up to their request lifecycle. Transactions are efficiently cost aware and thus faster executions are preferred.
+- **For Scalability, Think concurrent requests**: Serverless applications take advantage of the concurrency model, and tradeoffs at the design level are evaluated based on concurrency.
+- **Share nothing**: Function runtime environment and underlying infrastructure are short-lived, therefore local resources such as temporary storage are not guaranteed. State can be manipulated within a state machine execution lifecycle, and persistent storage is preferred for highly durable requirements.
+- **Assume no hardware affinity**: Underlying infrastructure may change. Leverage code or dependencies that are hardware-agnostic as CPU flags, for example, may not be available consistently.
+- **Orchestrate multiple functions of your application with state machines**: Chaining Lambda executions within the code to orchestrate the workflow of your application results in a monolithic and tightly coupled application. Instead, use a state machine to orchestrate transactions and communication flows.
+- **Use events to trigger transactions**: Events such as writing a new Amazon S3 object or an update to a database allow for transaction execution in response to business functionalities. This asynchronous event behavior is often consumer agnostic and drives just-in-time processing to ensure lean service design.
+- **Design for failures and duplicates**: Operations triggered from requests/events must be idempotent as failures can occur and a given request/event can be delivered more than once. Include appropriate retries for downstream calls.
 
 ## Scenarios
 In this section, we cover the five key scenarios that are common in many serverless workloads and how they influence the design and architecture of your serverless workloads on AWS. We will present the assumptions we made for each of these scenarios, the common drivers for the design, and a reference architecture of how these scenarios should be implemented.
@@ -146,10 +147,10 @@ Characteristics:
 
 ##### Reference Architecture
 
-1. Customers leverage your microservices by making API (that is, HTTP) calls. Ideally, your consumers should have a tightly bound service contract to your API in order to achieve consistent expectations of service levels and change control.
-2. Amazon API Gateway hosts RESTful HTTP requests and responses to customers. In this scenario, API Gateway provides built-in authorization, throttling, security, fault tolerance, request/response mapping, and performance optimizations.
-3. AWS Lambda contains the business logic to process incoming API calls and leverage DynamoDB as a persistent storage.
-4. Amazon DynamoDB persistently stores microservices data and scales based on demand. Since microservices are often designed to do one thing really well, a schemaless NoSQL data store is regularly incorporated.
+1. **Customers** leverage your microservices by making API (that is, HTTP) calls. Ideally, your consumers should have a tightly bound service contract to your API in order to achieve consistent expectations of service levels and change control.
+2. **Amazon API Gateway** hosts RESTful HTTP requests and responses to customers. In this scenario, API Gateway provides built-in authorization, throttling, security, fault tolerance, request/response mapping, and performance optimizations.
+3. **AWS Lambda** contains the business logic to process incoming API calls and leverage DynamoDB as a persistent storage.
+4. **Amazon DynamoDB** persistently stores microservices data and scales based on demand. Since microservices are often designed to do one thing really well, a schemaless NoSQL data store is regularly incorporated.
 
 Configuration notes:
 
@@ -188,28 +189,28 @@ Characteristics:
 
 ##### Reference Architecture
 
-1. Alexa users interact with Alexa skills by speaking to Alexa-enabled devices. Voice is the primary method of interaction.
-2. Alexa-enabled devices listen and activate when requested to do so, such as upon recognizing a wake word.
-3. The Alexa Service performs common Speech Language Understanding (SLU) processing on behalf of your Alexa skill, including Automated Speech Recognition (ASR), Natural Language Understanding (NLU), and Text to Speech (TTS) conversion.
-4. Alexa Skills Kit (ASK) is a collection of self-service APIs, tools, documentation, and code samples that makes it fast and easy for you to add skills to Alexa. ASK is a trusted AWS Lambda trigger, allowing for seamless integration.
-5. Alexa Custom Skill gives you control over the user experience and allows you to build a custom interaction model. It is the most flexible type of skill, but also the most complex.
-6. A Lambda function using the ASK SDK allows you to seamlessly build skills and avoid unnecessary complexity. You can process different types of requests sent from the Alexa Service and build speech responses.
-7. A DynamoDB database can provide a NoSQL data store that elastically scales with the usage of your skill. A database is commonly used by skills to for persisting user state and sessions.
-8. Alexa Smart Home Skill allows you to control devices such as lights, thermostats, smart TV’s, etc., using the Smart Home API. Smart Home skills are simpler to build that custom skills as they don’t give you control over the interaction model.
-9. A Lambda function is used to respond to device discovery and control requests from the Alexa Service. This allows control of a wide-ranging number of things, including entertainment devices, cameras, lighting, thermostats, locks, and many more.
-10. AWS IoT allows developers to securely connect their devices to the AWS platform and control interaction between their Alexa skill and their devices.
-11. An Alexa enabled Smart Home can have many IoT connected devices receiving and responding to directives from an Alexa skill.
-12. Amazon S3 stores you static assets for your skills, such as images, text content, and media. These contents are securely served using CloudFront.
-13. Amazon CloudFront is a fast Content Delivery Network (CDN) that serves content to geographically-distributed mobile users and includes security mechanisms for static assets in Amazon S3.
-14. Account Linking is needed when your skill must authenticate with another system. This action associates the Alexa user with a specific user in the other system.
+1. **Alexa users** interact with Alexa skills by speaking to Alexa-enabled devices. Voice is the primary method of interaction.
+2. **Alexa-enabled devices** listen and activate when requested to do so, such as upon recognizing a wake word.
+3. The **Alexa Service** performs common Speech Language Understanding (SLU) processing on behalf of your Alexa skill, including Automated Speech Recognition (ASR), Natural Language Understanding (NLU), and Text to Speech (TTS) conversion.
+4. **Alexa Skills Kit** (ASK) is a collection of self-service APIs, tools, documentation, and code samples that makes it fast and easy for you to add skills to Alexa. ASK is a trusted AWS Lambda trigger, allowing for seamless integration.
+5. **Alexa Custom Skill** gives you control over the user experience and allows you to build a custom interaction model. It is the most flexible type of skill, but also the most complex.
+6. A **Lambda** function using the ASK SDK allows you to seamlessly build skills and avoid unnecessary complexity. You can process different types of requests sent from the Alexa Service and build speech responses.
+7. A **DynamoDB database** can provide a NoSQL data store that elastically scales with the usage of your skill. A database is commonly used by skills to for persisting user state and sessions.
+8. **Alexa Smart Home Skill** allows you to control devices such as lights, thermostats, smart TV’s, etc., using the Smart Home API. Smart Home skills are simpler to build that custom skills as they don’t give you control over the interaction model.
+9. A **Lambda** function is used to respond to device discovery and control requests from the Alexa Service. This allows control of a wide-ranging number of things, including entertainment devices, cameras, lighting, thermostats, locks, and many more.
+10. **AWS IoT** allows developers to securely connect their devices to the AWS platform and control interaction between their Alexa skill and their devices.
+11. An Alexa enabled **Smart Home** can have many IoT connected devices receiving and responding to directives from an Alexa skill.
+12. **Amazon S3** stores you static assets for your skills, such as images, text content, and media. These contents are securely served using CloudFront.
+13. **Amazon CloudFront** is a fast Content Delivery Network (CDN) that serves content to geographically-distributed mobile users and includes security mechanisms for static assets in Amazon S3.
+14. **Account Linking** is needed when your skill must authenticate with another system. This action associates the Alexa user with a specific user in the other system.
 
 Configuration notes:
 
 - Validate Smart Home request and response payloads by validating against the JSON schema for all possible Alexa Smart Home messages sent by a skill to Alexa.
 - Ensure that your Lambda function timeout is set to under 8 seconds and that the function can handle requests within that timeframe. (The Alexa Service timeout is 8 seconds.)
 - Lambda functions configured to run within a VPC might experience a startup penalty due to the Elastic Network Interface (ENI) setup. This extra processing time might cause the first request to exceed the 8 second timeout limit of the Alexa service.
-- Follow best practices7 when creating your DynamoDB tables. Calculate your read/write capacity and table partitioning to ensure reasonable response times. For skills that are read-heavy, Amazon DynamoDB Accelerator (DAX) can greatly improve response times.
-- Account linking can provide user information that is stored in an external system. Use that information to provide contextual and personalized experience for your user. Alexa has guidelines on account linking to help you provide frictionless experiences.
+- Follow best [practices](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html) when creating your DynamoDB tables. Calculate your read/write capacity and table partitioning to ensure reasonable response times. For skills that are read-heavy, Amazon DynamoDB Accelerator (DAX) can greatly improve response times.
+- Account linking can provide user information that is stored in an external system. Use that information to provide contextual and personalized experience for your user. Alexa has [guidelines on account linking](https://developer.amazon.com/ja/blogs/alexa/post/0fbd9756-6ea0-43d5-b213-873ede1b0595/tips-for-successfully-adding-account-linking-to-your-alexa-skill) to help you provide frictionless experiences.
 - Use the skill beta testing tool to collect early feedback during development and for skills versioning to reduce impact on skills already live.
 - Use the ASK Command Line Interface (ASK CLI) to automate skill development and deployment.
 
@@ -240,24 +241,24 @@ Characteristics:
 
 ##### Reference Architecture
 
-1. Amazon Cognito is used for user management and as an identity provider for your mobile application. Additionally, it allows mobile users to leverage existing social identities such as Facebook, Twitter, Google+, and Amazon to sign in.
-2. Mobile users interact with the mobile application backend by performing GraphQL operations against AWS AppSync and AWS service APIs (for example, Amazon S3 and Amazon Cognito).
-3. Amazon S3 stores mobile application static assets including certain mobile user data such as profile images. Its contents are securely served via CloudFront.
-4. AWS AppSync hosts GraphQL HTTP requests and responses to mobile users. In this scenario, data from AWS AppSync is real-time when devices are connected, and data is available offline as well. Data sources can be Amazon DynamoDB, Amazon Elasticsearch Service, or AWS Lambda functions.
-5. Amazon Elasticsearch Service acts as a main search engine for your mobile application as well as analytics.
-6. DynamoDB provides persistent storage for your mobile application, including mechanisms to expire unwanted data from inactive mobile users through a Time To Live (TTL) feature.
-7. A Lambda function handles interaction with other 3rd party services, or calling other AWS services for custom flows, which can be part of the GraphQL response to clients.
-8. DynamoDB Streams captures item-level changes and enables a Lambda function to update additional data sources.
-9. A Lambda function manages streaming data between DynamoDB and Amazon ES, allowing customers to combine data sources logical GraphQL types and operations.
-10. Amazon Pinpoint captures analytics from clients, including user sessions and custom metrics for application insights.
-11. Amazon Pinpoint delivers messages to all users/devices or a targeted subset based on analytics that have been gathered. Messages can be customized and sent over Push Notifications, Email, or SMS channels.
+1. **Amazon Cognito** is used for user management and as an identity provider for your mobile application. Additionally, it allows mobile users to leverage existing social identities such as Facebook, Twitter, Google+, and Amazon to sign in.
+2. **Mobile users** interact with the mobile application backend by performing GraphQL operations against AWS AppSync and AWS service APIs (for example, Amazon S3 and Amazon Cognito).
+3. **Amazon S3** stores mobile application static assets including certain mobile user data such as profile images. Its contents are securely served via CloudFront.
+4. **AWS AppSync** hosts GraphQL HTTP requests and responses to mobile users. In this scenario, data from AWS AppSync is real-time when devices are connected, and data is available offline as well. Data sources can be **Amazon DynamoDB**, **Amazon Elasticsearch Service**, or **AWS Lambda** functions.
+5. **Amazon Elasticsearch Service** acts as a main search engine for your mobile application as well as analytics.
+6. **DynamoDB** provides persistent storage for your mobile application, including mechanisms to expire unwanted data from inactive mobile users through a Time To Live (TTL) feature.
+7. A **Lambda** function handles interaction with other 3rd party services, or calling other AWS services for custom flows, which can be part of the GraphQL response to clients.
+8. **DynamoDB Streams** captures item-level changes and enables a Lambda function to update additional data sources.
+9. A **Lambda** function manages streaming data between DynamoDB and Amazon ES, allowing customers to combine data sources logical GraphQL types and operations.
+10. **Amazon Pinpoint** captures analytics from clients, including user sessions and custom metrics for application insights.
+11. **Amazon Pinpoint** delivers messages to all users/devices or a targeted subset based on analytics that have been gathered. Messages can be customized and sent over Push Notifications, Email, or SMS channels.
 
 Configuration notes:
 
-- Performance test3 your Lambda functions with different memory and timeout settings to ensure that you’re using the most appropriate resources for the job.
-- Follow best practices4 when creating your DynamoDB tables and consider having AWS AppSync automatically provision them from a GraphQL schema, which will use a well-distributed hash key and create indexes for your operations. Make certain to calculate your read/write capacity and table partitioning to ensure reasonable response times.
+- [Performance test](https://github.com/alexcasalboni/aws-lambda-power-tuning) your Lambda functions with different memory and timeout settings to ensure that you’re using the most appropriate resources for the job.
+- Follow [best practices](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/BestPractices.html) when creating your DynamoDB tables and consider having AWS AppSync automatically provision them from a GraphQL schema, which will use a well-distributed hash key and create indexes for your operations. Make certain to calculate your read/write capacity and table partitioning to ensure reasonable response times.
 - Use the AWS AppSync client SDKs to optimize your application experience, as it implements a write-through cache and accounts for lossy network connections where latencies from client-to-cloud can vary.
-- Follow best practices5 when managing Amazon ES Domains. Additionally, Amazon ES provides an extensive guide6 on designing with regard to sharding and access patterns that also apply here.
+- Follow [best practices](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html) when managing Amazon ES Domains. Additionally, Amazon ES provides an extensive [guide](https://www.elastic.co/guide/en/elasticsearch/guide/current/scale.html) on designing with regard to sharding and access patterns that also apply here.
 - Reduce unnecessary Lambda function invocations by leveraging caching when possible at the API level.
 - Use the Fine-Grained-Access-Controls of AWS AppSync, configured in resolvers, to filter GraphQL requests down to the per-user or group level if necessary. This can be applied to AWS IAM or Cognito User Pools authorization with AWS AppSync.
 - Use AWS Amplify and the Amplify CLI to compose and integrate your application with multiple AWS Services. Amplify toolchain also takes care of deploying and managing stacks.
@@ -277,21 +278,21 @@ Characteristics:
 ##### Reference Architecture
 Here we are presenting a scenario for common stream processing, which is a reference architecture for analyzing social media data.
 
-1. Data producers use the Amazon Kinesis Producer Library (KPL) to send social media streaming data to a Kinesis stream. Amazon Kinesis Agent and custom data producers that leverage the Kinesis API can also be used.
-1. An Amazon Kinesis stream collects, processes, and analyzes real-time streaming data produced by data producers. Data ingested into the stream can be processed by a consumer, which, in this case, is Lambda.
-1. AWS Lambda acts as a consumer of the stream that receives an array of the ingested data as a single event/invocation. Further processing is carried out by the Lambda function. The transformed data is then stored in a persistent storage, which, in this case, is DynamoDB.
-1. Amazon DynamoDB provides a fast and flexible NoSQL database service including triggers that can integrate with AWS Lambda to make such data available elsewhere.
-1. Business users leverage a reporting interface on top of DynamoDB to gather insights out of social media trend data.
+1. **Data producers** use the Amazon Kinesis Producer Library (KPL) to send social media streaming data to a Kinesis stream. Amazon Kinesis Agent and custom data producers that leverage the Kinesis API can also be used.
+1. An **Amazon Kinesis stream** collects, processes, and analyzes real-time streaming data produced by data producers. Data ingested into the stream can be processed by a consumer, which, in this case, is Lambda.
+1. **AWS Lambda** acts as a consumer of the stream that receives an array of the ingested data as a single event/invocation. Further processing is carried out by the Lambda function. The transformed data is then stored in a persistent storage, which, in this case, is DynamoDB.
+1. **Amazon DynamoDB** provides a fast and flexible NoSQL database service including triggers that can integrate with AWS Lambda to make such data available elsewhere.
+1. **Business users** leverage a reporting interface on top of DynamoDB to gather insights out of social media trend data.
 
 Configuration notes:
 
-- Follow best practices7 when re-sharding Kinesis streams in order to accommodate a higher ingestion rate. Concurrency for stream processing is dictated by the number of shards. Therefore, adjust it according to your throughput requirements.
-- Consider reviewing the Streaming Data Solutions whitepaper8 for batch processing, analytics on streams, and other useful patterns.
-- When not using KPL, make certain to take into account partial failures for non-atomic operations such as PutRecords since the Kinesis API returns both successfully and unsuccessfully processed records9 upon ingestion time.
-- Duplicated records10 may occur, and you must leverage both retries and idempotency within your application – both consumers and producers.
+- Follow [best practices](http://docs.aws.amazon.com/streams/latest/dev/kinesis-record-processor-scaling.html) when re-sharding Kinesis streams in order to accommodate a higher ingestion rate. Concurrency for stream processing is dictated by the number of shards. Therefore, adjust it according to your throughput requirements.
+- Consider reviewing the [Streaming Data Solutions whitepaper](https://d0.awsstatic.com/whitepapers/whitepaper-streaming-data-solutions-on-aws-with-amazon-kinesis.pdf) for batch processing, analytics on streams, and other useful patterns.
+- When not using KPL, make certain to take into account partial failures for non-atomic operations such as PutRecords since the Kinesis API returns both successfully and unsuccessfully processed [records](http://docs.aws.amazon.com/kinesis/latest/APIReference/API_PutRecords.html) upon ingestion time.
+- [Duplicated records](http://docs.aws.amazon.com/streams/latest/dev/kinesis-record-processor-duplicates.html) may occur, and you must leverage both retries and idempotency within your application – both consumers and producers.
 - Consider using Kinesis Firehose over Lambda when ingested data needs to be continuously loaded into Amazon S3, Amazon Redshift, or Amazon ES.
 - Consider using Kinesis Analytics over Lambda when standard SQL could be used to query streaming data, and load only its results into Amazon S3, Amazon Redshift, Amazon ES, or Kinesis Streams.
-- Follow best practices for AWS Lambda stream-based invocation11 since that covers the effects on batch size, concurrency per shard, and monitoring stream processing in more detail.
+- Follow best practices for [AWS Lambda stream-based invocation](http://docs.aws.amazon.com/lambda/latest/dg/best-practices.html#stream-events) since that covers the effects on batch size, concurrency per shard, and monitoring stream processing in more detail.
 
 ### Web Application
 Web applications typically have demanding requirements to ensure a consistent, secure, and reliable user experience. In order to ensure high availability, global availability, and the ability to scale to thousands or potentially millions of users, companies often had to reserve substantial excess capacity to handle web requests at their highest anticipated demand. This often required managing fleets of servers and additional infrastructure components which, in turn, led to significant capital expenditures and long lead times for capacity provisioning.
@@ -308,29 +309,29 @@ Characteristics:
 
 ##### Reference Architecture
 
-1. Consumers of this web application may be geographically concentrated or worldwide. Leveraging Amazon CloudFront not only provides a better performance experience for these consumers through caching and optimal origin routing, but limits redundant calls to your backend.
-1. Amazon S3 hosts web application static assets and is securely served through CloudFront.
-1. An Amazon Cognito user pool provides user management and identity provider feature for your web application.
-1. As static content served by Amazon S3 is downloaded by the consumer, in many scenarios, dynamic content needs to be sent to or received by your application. For example, when a user submits data through a form, Amazon API Gateway serves as the secure endpoint to make these calls and return responses displayed through your web application.
-1. An AWS Lambda function provides Create, Read, Update, Delete (CRUD) operations on top of DynamoDB for your web application.
-1. Amazon DynamoDB can provide the backend NoSQL data store to elastically scale with the traffic of your web application.
+1. **Consumers** of this web application may be geographically concentrated or worldwide. Leveraging Amazon CloudFront not only provides a better performance experience for these consumers through caching and optimal origin routing, but limits redundant calls to your backend.
+1. **Amazon S3** hosts web application static assets and is securely served through CloudFront.
+1. An **Amazon Cognito user pool** provides user management and identity provider feature for your web application.
+1. As static content served by Amazon S3 is downloaded by the consumer, in many scenarios, dynamic content needs to be sent to or received by your application. For example, when a user submits data through a form, **Amazon API Gateway** serves as the secure endpoint to make these calls and return responses displayed through your web application.
+1. An **AWS Lambda** function provides Create, Read, Update, Delete (CRUD) operations on top of DynamoDB for your web application.
+1. **Amazon DynamoDB** can provide the backend NoSQL data store to elastically scale with the traffic of your web application.
 
 Configuration Notes:
 
 - Follow best practices for deploying your serverless web application frontend on AWS. More information on that can be found in the operational excellence pillar. Use Amazon S3 for hosting your static web content, and leverage CloudFront to securely deliver your content with low latency and high transfer speeds.
 - For single-page web applications, make use of S3 object versioning, CloudFront cache expiration, and fine-tuned content TTL to reflect changes in deployments.
 - Refer to the security pillar for recommendations for authentication and authorization.
-- Refer to the RESTful Microservices scenario for recommendations on web application backend.
-- For web applications that offer personalized services, you can leverage API Gateway usage plans12 as well as Amazon Cognito user pools in order to scope what different sets of users have access to. For example, a Premium user can have higher throughput for API calls, access to additional APIs, additional storage, etc.
-- Refer to the Mobile Backend scenario if your application uses search capabilities that are not covered in this scenario.
+- Refer to the [RESTful Microservices](#RESTful-Microservices) scenario for recommendations on web application backend.
+- For web applications that offer personalized services, you can leverage API Gateway [usage plans](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html) as well as Amazon Cognito user pools in order to scope what different sets of users have access to. For example, a Premium user can have higher throughput for API calls, access to additional APIs, additional storage, etc.
+- Refer to the [Mobile Backend](#Mobile-Backend) scenario if your application uses search capabilities that are not covered in this scenario.
 
 ## The Pillars of the Well-Architected Framework
 This section describes each of the pillars, and includes definitions, best practices, questions, considerations, and key AWS services that are relevant when architecting solutions for serverless applications.
 
-For brevity, we have only selected the questions from the Well-Architected Framework that are specific to serverless workloads. Questions that have not been included in this document should still be considered when designing your architecture. We recommend that you read the AWS Well-Architected Framework whitepaper.
+For brevity, we have only selected the questions from the Well-Architected Framework that are specific to serverless workloads. Questions that have not been included in this document should still be considered when designing your architecture. We recommend that you read the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) whitepaper.
 
 ### Operational Excellence Pillar
-The operational excellence pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
+The **operational excellence** pillar includes the ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
 
 #### Definition
 There are three best practice areas for operational excellence in the cloud:
@@ -347,6 +348,7 @@ In addition to what is covered by the Well-Architected Framework concerning proc
 There are no operational practices unique to serverless applications that belong to this sub-section. 
 
 ##### Operate
+
 > SERVOPS 1: How are you monitoring and responding to anomalies in your serverless application?
 
 Similar to non-serverless applications, anomalies can happen at larger scale in distributed systems. Due to the nature of serverless architectures, it is fundamental to have distributed tracing.
@@ -365,9 +367,9 @@ Annotations are key-value pairs with string, number, or Boolean values that are 
 
 Alarms should be configured at both individual and aggregated levels. Aggregate-level examples include alarming but not limited to the following metrics:
 
-- Lambda: Throttling, Errors, ConcurrentExecutions, UnreservedConcurrentExecutions
-- Step Functions: ActivitiesTimedOut, ActivitiesFailed, ActivitiesHeartbeatTimedOut
-- API Gateway: 5XXError, 4XXError
+- **Lambda**: Throttling, Errors, ConcurrentExecutions, UnreservedConcurrentExecutions
+- **Step Functions**: ActivitiesTimedOut, ActivitiesFailed, ActivitiesHeartbeatTimedOut
+- **API Gateway**: 5XXError, 4XXError
 
 An individual-level example is alarming on the Duration metric from Lambda or IntegrationLatency from API Gateway when invoked through API, since different parts of the application likely have different profiles. A bad deployment that makes a function execute for much longer than usual could be quickly captured in this instance.
 
@@ -376,18 +378,18 @@ API Gateway can create detailed metrics per resource/method/stage as well as per
 It is important to understand every Amazon CloudWatch Metrics and Dimensions for every AWS Service you intend to use so that you can put a plan in a place to understand its behavior and add custom metrics where you see fit.
 Below are guidelines that can be used whether you are creating a dashboard or looking to formulate a plan for new and existing Applications when it comes to metrics:
 
-- Business Metrics
+- **Business Metrics**
     - Business KPIs that will measure your application performance against business goals and extremely important to know when something is critically affecting your overall business (revenue wise or not).
-    - Examples: Orders placed, debit/credit card operations, flights purchased, etc.
-- Customer Experience Metrics
+    - **Examples**: Orders placed, debit/credit card operations, flights purchased, etc.
+- **Customer Experience Metrics**
     - Customer Experience data dictates not only the overall effectiveness of its UI/UX but also whether changes or anomalies are affecting customers experience in a particular section of your application. Often times measured in percentiles to prevent outliers when trying to understand the impact over time and how spread it is across your customer base.
-    - Examples: Perceived latency, time it takes to add an item to a basket/to checkout, page load times, etc.
-- System Metrics
+    - **Examples**: Perceived latency, time it takes to add an item to a basket/to checkout, page load times, etc.
+- **System Metrics**
     - Vendor and Application metrics are important to underpin root causes from the above sections. They also tell you if your systems are healthy, at risk, or already your customers.
-    - Examples: Percentage of HTTP Errors/Success, Memory utilization, function duration/error/throttling, queue length, stream records length, Integration latency, etc.
-- Operational Metrics
+    - **Examples**: Percentage of HTTP Errors/Success, Memory utilization, function duration/error/throttling, queue length, stream records length, Integration latency, etc.
+- **Operational Metrics**
     - Ops metrics are equally important to understand sustainability and maintenance of a given system and crucial to pinpoint how stability progressed/degraded over time
-    - Examples: Number of tickets ([un]successful resolutions, etc.), number of times people on-call were paged, availability, CI/CD pipeline stats (successful/failed deployments, feedback time, cycle and lead time, etc).
+    - **Examples**: Number of tickets (\[un\]successful resolutions, etc.), number of times people on-call were paged, availability, CI/CD pipeline stats (successful/failed deployments, feedback time, cycle and lead time, etc).
 
 > SERVOPS 2: How are you evolving your serverless application while minimizing the impact of change?
 
@@ -418,26 +420,26 @@ Refer to the following resources to learn more about our best practices for oper
 
 ##### Documentation & Blogs
 
-- API Gateway stage variables13
-- Lambda environment variables14
-- SAM CLI15
-- X-Ray latency distribution16
-- Troubleshooting Lambda-based applications with X-Ray17
-- System Manager (SSM) Parameter Store18
-- Continuous Deployment for Serverless applications blog post19
-- SAM Farm: CI/CD example20
+- [API Gateway stage variables](http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html)
+- [Lambda environment variables](http://docs.aws.amazon.com/lambda/latest/dg/env_variables.html)
+- [SAM CLI](https://github.com/awslabs/serverless-application-model)
+- [X-Ray latency distribution](https://aws.amazon.com/blogs/aws/latency-distribution-graph-in-aws-x-ray/)
+- [Troubleshooting Lambda-based applications with X-Ray](http://docs.aws.amazon.com/lambda/latest/dg/lambda-x-ray.html)
+- [System Manager (SSM) Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html)
+- [Continuous Deployment for Serverless applications blog post](https://aws.amazon.com/blogs/compute/continuous-deployment-for-serverless-applications/)
+- [SAM Farm: CI/CD example](https://github.com/awslabs/aws-serverless-samfarm)
 
 ##### Whitepaper
 
-- Practicing Continuous Integration/Continuous Delivery on AWS21
+- [Practicing Continuous Integration/Continuous Delivery on AWS](https://d0.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
 
 ##### Third-Party Tools
 
-- Serverless Developer Tools page including third-party frameworks/tools22
-- Stelligent: CodePipeline Dashboard for operational metrics
+- [Serverless Developer Tools page including third-party frameworks/tools](https://aws.amazon.com/serverless/developer-tools/)
+- [Stelligent: CodePipeline Dashboard for operational metrics](https://stelligent.com/2017/11/16/codepipeline-dashboard/)
 
 ### Security Pillar
-The security pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+The **security** pillar includes the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
 
 #### Definition
 There are five best practice areas for security in the cloud:
@@ -452,7 +454,7 @@ Serverless addresses some of today’s biggest security concerns as it takes inf
 
 The questions in this section are designed to help you address specific ways one attacker could try to gain access to or exploit misconfigured permissions that could lead to abuse. The practices described in this section strongly influence the security of your entire cloud platform and so should not only be validated carefully but also reviewed frequently.
 
-The incident response category will not be described in this document because the practices from the AWS Well-Architected Framework still apply.
+The **incident response** category will not be described in this document because the practices from the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) still apply.
 
 #### Best Practices
 
@@ -475,7 +477,7 @@ For customers who currently have an existing Identity Provider (IdP), you can le
 
 For customers who don’t have an IdP, you can leverage Amazon Cognito user pools to either provide built-in user management or integrate with external identity providers such as Facebook, Twitter, Google+, and Amazon.
 
-This is commonly seen in the mobile backend scenario, where users authenticate by using existing accounts in social media platforms while being able to register/sign in with their email address/username. This approach also provides granular authorization through OAuth Scopes.
+This is commonly seen in the mobile backend scenario, where users authenticate by using existing accounts in social media platforms while being able to register/sign in with their email address/username. This approach also provides granular authorization through [OAuth Scopes](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-enable-cognito-user-pool.html).
 
 The API Gateway API Keys feature is not a security mechanism and should not be used for authorization. It should be used primarily to track a consumer's usage across your API and could be used in addition to the authorizers previously mentioned in this section.
 
@@ -515,7 +517,7 @@ Leverage CloudWatch Logs metric filters to transform your serverless application
 
 Similarly, AWS CloudTrail logs should also be used both for auditing and for API calls.
 
-Consider enabling API Gateway Access Logs and selectively choose only the data you need. Depending on your design, your serverless application might contain sensitive data. For this reason, we recommend that you encrypt any sensitive data traversing your serverless application. For more information, see the Data Protection section.
+Consider enabling [API Gateway Access Logs](https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-logging.html) and selectively choose only the data you need. Depending on your design, your serverless application might contain sensitive data. For this reason, we recommend that you encrypt any sensitive data traversing your serverless application. For more information, see the [Data Protection](#Data-Protection) section.
 
 Lambda functions are designed to do one task and complete it as fast as possible. Therefore, making API calls to CloudWatch within your code may cause the observer effect and excessive printing statements may ingest unnecessary data into your logs. This will cause both an increase in signal-to-noise ratio as well as CloudWatch Logs ingestion charges.
 
@@ -528,7 +530,7 @@ Although there is no infrastructure to manage in serverless applications, there 
 
 > SERVSEC 5: For VPC access, how are you enforcing networking boundaries as to what AWS Lambda functions can access?
 
-Lambda functions can be configured to access resources within a VPC including resources sitting outside of AWS through VPN connections. You should review security group best practices as covered in the AWS Well-Architected Framework.
+Lambda functions can be configured to access resources within a VPC including resources sitting outside of AWS through VPN connections. You should review security group best practices as covered in the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/).
 
 Also, similar to a non-serverless application, a security group and Network Access Control Lists (NACLs) should be the basis on which networking boundaries are enforced. For workloads that require outbound traffic filtering due to compliance reasons, proxies can be used in the exact same manner that they are placed in non-serverless architectures.
 
@@ -542,7 +544,7 @@ API Gateway employs the use of TLS across all communications, client and integra
 
 Additionally, malformed or intercepted input can be used as an attack vector to either gain access to a system or cause it to malfunction.
 
-Sensitive data should be protected at all times in all layers possible as discussed in detail in the AWS Well-Architected Framework. The recommendations in that whitepaper still apply here.
+Sensitive data should be protected at all times in all layers possible as discussed in detail in the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/). The recommendations in that whitepaper still apply here.
 
 With regard to API Gateway, sensitive data should be either encrypted at the client-side before making its way as part of an HTTP request or sent as a payload as part of an HTTP POST request. That also includes encrypting any headers that might contain sensitive data prior to making a given request.
 
@@ -550,7 +552,7 @@ Concerning Lambda functions or any integrations that API Gateway may be configur
 
 We strictly advise against sending, logging, and storing unencrypted sensitive data, be it part of an HTTP request path/query strings or standard output of a Lambda function.
 
-Enabling logging in API Gateway where sensitive data is unencrypted is also discouraged. As mentioned in the Detective Controls sub-section, you should consult about such an operation with your compliance team before enabling API Gateway logging.
+Enabling logging in API Gateway where sensitive data is unencrypted is also discouraged. As mentioned in the [Detective Controls](#Detective-Controls) sub-section, you should consult about such an operation with your compliance team before enabling API Gateway logging.
 
 > SERVSEC 7: What is your strategy on input validation?
 
@@ -564,29 +566,29 @@ Refer to the following resources to learn more about our best practices for secu
 
 ##### Documentation & Blogs
 
-- IAM role for Lambda function with Amazon S3 example23
-- API Gateway Request Validation24
-- API Gateway Lambda Authorizers25
-- Securing API Access with Amazon Cognito Federated Identities, Amazon Cognito User Pools, and Amazon API Gateway26
+- [IAM role for Lambda function with Amazon S3 example](http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-create-iam-role.html)
+- [API Gateway Request Validation](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html)
+- [API Gateway Lambda Authorizers](http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html)
+- [Securing API Access with Amazon Cognito Federated Identities, Amazon Cognito User Pools, and Amazon API Gateway](https://aws.amazon.com/blogs/compute/secure-api-access-with-amazon-cognito-federated-identities-amazon-cognito-user-pools-and-amazon-api-gateway/)
 
-- Configuring VPC Access for AWS Lambda27
-- Filtering VPC outbound traffic with Squid Proxies28
+- [Configuring VPC Access for AWS Lambda](http://docs.aws.amazon.com/lambda/latest/dg/vpc.html)
+- [Filtering VPC outbound traffic with Squid Proxies](https://aws.amazon.com/pt/articles/using-squid-proxy-instances-for-web-service-access-in-amazon-vpc-another-example-with-aws-codedeploy-and-amazon-cloudwatch/)
 
 ##### Whitepapers
 
-- OWASP Secure Coding Best Practices29
-- AWS Security Best Practices30
+- [OWASP Secure Coding Best Practices](https://www.owasp.org/images/0/08/OWASP_SCP_Quick_Reference_Guide_v2.pdf)
+- [AWS Security Best Practices](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
 
 ##### Partner Solutions
 
-- PureSec Serverless Security
-- Twistlock Serverless Security31
-- Protego Serverless Security
-- Snyk – Commercial Vulnerability DB and Dependency Check32
+- [PureSec Serverless Security](https://puresec.io/)
+- [Twistlock Serverless Security](https://www.twistlock.com/products/serverless-security/)
+- [Protego Serverless Security](https://www.protego.io/)
+- [Snyk – Commercial Vulnerability DB and Dependency Check](https://snyk.io/)
 
 ##### Third-Party Tools
 
-- OWASP Vulnerability Dependency Check33
+- [OWASP Vulnerability Dependency Check](https://www.owasp.org/index.php/OWASP_Dependency_Check)
 
 ### Reliability Pillar
 The reliability pillar includes the ability of a system to recover from infrastructure or service disruptions, dynamically acquire computing resources to meet demand, and mitigate disruptions such as misconfigurations or transient network issues.
@@ -608,7 +610,7 @@ To achieve reliability, a system must have a well-planned foundation and monitor
 
 AWS enforces default service limits to protect customers for unauthorized use of services. Limits that are not properly monitored may result in a degradation or throttling of service. Many limits are soft limits and can be raised if you anticipate exceeding them.
 
-You can use AWS Trusted Advisor within the AWS Management Console and APIs to detect whether a service exceeds 80% of a limit.
+You can use AWS Trusted Advisor within the AWS Management Console and APIs to detect whether a service exceeds 80% of a [limit](https://aws.amazon.com/answers/account-management/limit-monitor/).
 
 You can also proactively raise limits if you anticipate exceeding them for workloads. When raising these limits, ensure there is a sufficient gap between your service limit and your max usage to accommodate scale or absorb a denial of service attack. You should consider these limits across all relevant accounts and Regions.
 
@@ -631,7 +633,7 @@ A common way to capture API keys is through a developer portal. This provides yo
 
 As discussed in the security pillar, API keys are not a security mechanism to authorize requests, and, therefore, should only be used with one of the available authorization options available within API Gateway.
 
-Concurrency controls are sometimes necessary to protect specific workloads against service failure as they may not scale as rapidly as Lambda. Concurrency controls enable you to control the allocation of how many concurrent invocations of a particular Lambda function and are set at the individual Lambda function level. Lambda invocations that exceed concurrency set to an individual function will be throttled by the AWS Lambda Service and the result will vary depending on their event source – Synchronous invocations return HTTP 429 error, Asynchronous invocations will be queued and retried while Stream-based event sources will retry up to their record expiration time.
+Concurrency controls are sometimes necessary to protect specific workloads against service failure as they may not scale as rapidly as Lambda. [Concurrency controls](https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html) enable you to control the allocation of how many concurrent invocations of a particular Lambda function and are set at the individual Lambda function level. Lambda invocations that exceed concurrency set to an individual function will be throttled by the AWS Lambda Service and the result will vary depending on their event source – Synchronous invocations return HTTP 429 error, Asynchronous invocations will be queued and retried while Stream-based event sources will retry up to their record expiration time.
 
 Controlling concurrency is particularly useful for the following scenarios:
 
@@ -700,7 +702,7 @@ Whenever possible, Step Functions should be used to minimize the amount of custo
 
 Moreover, non-atomic operations such as PutRecords (Kinesis) and BatchWriteItem (DynamoDB) can return successful in the event of a partial failure. Therefore, the response should be inspected at all times when using such operations and programmatically dealt with.
 
-For synchronous parts that are transaction-based and depend on certain guarantees and requirements, rolling back failed transactions as described by the Saga pattern35 can also be achieved by using Step Functions state machines, which will decouple and simplify the logic of your application.
+For synchronous parts that are transaction-based and depend on certain guarantees and requirements, rolling back failed transactions as described by the [Saga pattern](http://theburningmonk.com/2017/07/applying-the-saga-pattern-with-aws-lambda-and-step-functions/) can also be achieved by using Step Functions state machines, which will decouple and simplify the logic of your application.
 
 #### Key AWS Services
 Key AWS services for reliability are AWS Marketplace, Trusted Advisor, CloudWatch Logs, CloudWatch, API Gateway, Lambda, X-ray, Step Functions, Amazon SQS, and Amazon SNS.
@@ -709,31 +711,31 @@ Key AWS services for reliability are AWS Marketplace, Trusted Advisor, CloudWatc
 Refer to the following resources to learn more about our best practices for security.
 
 ##### Documentation & Blogs
-- Limits in Lambda36
-- Limits in API Gateway37
-- Limits in Kinesis Streams38
-- Limits in DynamoDB39
-- Limits in Step Functions40
-- Error handling patterns41
-- Serverless testing with Lambda42
-- Monitoring Lambda Functions Logs43
-- Versioning Lambda44
-- Stages in API Gateway45
-- API Retries in AWS46
-- Step Functions error handling47
-- X-Ray48
-- Lambda DLQ49
-- Error handling patterns with API Gateway and Lambda50
-- Step Functions Wait state51
-- Saga pattern52
-- Applying Saga pattern via Step Functions53
+- [Limits in Lambda](http://docs.aws.amazon.com/lambda/latest/dg/limits.html)
+- [Limits in API Gateway](http://docs.aws.amazon.com/apigateway/latest/developerguide/limits.html#api-gateway-limits)
+- [Limits in Kinesis Strea](http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)
+- [Limits in DynamoDB](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
+- [Limits in Step Functions](http://docs.aws.amazon.com/step-functions/latest/dg/limits.html)
+- [Error handling patterns](https://aws.amazon.com/blogs/compute/error-handling-patterns-in-amazon-api-gateway-and-aws-lambda/)
+- [Serverless testing with Lambda](https://aws.amazon.com/blogs/compute/serverless-testing-with-aws-lambda/)
+- [Monitoring Lambda Functions Logs](http://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-logs.html)
+- [Versioning Lambda](http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)
+- [Stages in API Gateway](http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html)
+- [API Retries in AWS](http://docs.aws.amazon.com/general/latest/gr/api-retries.html)
+- [Step Functions error handling](http://docs.aws.amazon.com/step-functions/latest/dg/tutorial-handling-error-conditions.html#using-state-machine-error-conditions-step-4)
+- [X-Ray](http://docs.aws.amazon.com/xray/latest/devguide/xray-services-lambda.html)
+- [Lambda DLQ](http://docs.aws.amazon.com/lambda/latest/dg/dlq.html)
+- [Error handling patterns with API Gateway and Lambda](https://aws.amazon.com/blogs/compute/error-handling-patterns-in-amazon-api-gateway-and-aws-lambda/)
+- [Step Functions Wait state](http://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html)
+- [Saga pattern](http://microservices.io/patterns/data/saga.html)
+- [Applying Saga pattern via Step Functions](http://theburningmonk.com/2017/07/applying-the-saga-pattern-with-aws-lambda-and-step-functions/)
 
 #### Whitepapers
 
-- Microservices on AWS54
+- [Microservices on AWS](https://d0.awsstatic.com/whitepapers/microservices-on-aws.pdf)
 
 ### Performance Efficiency Pillar
-The performance efficiency pillar focuses on the efficient use of computing resources to meet requirements and the maintenance of that efficiency as demand changes and technologies evolve.
+The **performance efficiency** pillar focuses on the efficient use of computing resources to meet requirements and the maintenance of that efficiency as demand changes and technologies evolve.
 
 #### Definition
 Performance efficiency in the cloud is composed of four areas:
@@ -795,6 +797,7 @@ Regional API is the system-default option for creating APIs with API Gateway. A 
 The table below can help you decide whether to deploy and Edge-optimized API or Regional API Endpoint:
 
 || Edge-optimized API | Regional API Endpoint |
+| --- | --- | --- |
 | API is accessed across regions. Includes API Gateway managed CloudFront distribution | X ||
 | API is accessed within same region. Least request latency when API is accessed from same region as API is deployed || X |
 | Ability to associate own CloudFront distribution || X |
@@ -836,7 +839,7 @@ In a Serverless Data Processing workflow, data is ingested from clients into Kin
 
 As you may have different transformations for different data types, we recommend granularly splitting the transformations into different Lambda functions for optimal performance. With this approach, you have the flexibility to run data transformation in parallel and gain speed as well as reduce cost.
 
-Kinesis Data Firehose also offers native data transformations that may be helpful for certain use cases as it removes the need for a subsequent Lambda function under certain common scenarios such as transformations: Apache Log/System logs to CSV, JSON; JSON to Parquet or ORC. An exception to the rule would be when you want to partition the data for optimal storage and querying formats for Athena or Redshift spectrum.
+Kinesis Data Firehose also offers native [data transformations](https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html) that may be helpful for certain use cases as it removes the need for a subsequent Lambda function under certain common scenarios such as transformations: Apache Log/System logs to CSV, JSON; JSON to Parquet or ORC. An exception to the rule would be when you want to partition the data for optimal storage and querying formats for Athena or Redshift spectrum.
 
 ##### Serverless Event Submission with Status Updates
 Suppose you have an e-commerce site and a user submits an order, which in turn kicks off an inventory deduction and shipment process; or an enterprise application that submits a large query that may take minutes to respond.
@@ -854,7 +857,7 @@ In this scenario, API Gateway returns a response to client containing a request 
 For this example, such queue managed by SQS serves multiple purposes:
 
 1. Storing the request record durably is important because the client can confidently proceed throughout the workflow knowing that the request will eventually be processed
-1. Upon a burst of events that may temporarily overwhelm the backend, the request can be polled for processing when resources become available.
+2. Upon a burst of events that may temporarily overwhelm the backend, the request can be polled for processing when resources become available.
 
 Note: Compared to the first example without a queue, Step Functions is storing the data durably without the need for a queue or state-tracking data sources.
 
@@ -873,14 +876,13 @@ For Throttling, with API Gateway you can issue API Keys with Usage Plans. Usage 
 For timestamps, the system being polled can return an extra field with a timestamp or time period as to when it is safe for the consumer to poll once again. This approach follows an optimistic scenario where the consumer will respect and use this wisely and in the event of abuse you can also employ Throttling for a more complete implementation.
 
 #### Review
-See the AWS Well-Architected Framework whitepaper for best practices in the review area for performance efficiency that apply to serverless applications.
+See the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) whitepaper for best practices in the **review** area for performance efficiency that apply to serverless applications.
 
 #### Monitoring
-See the AWS Well-Architected Framework whitepaper for best practices in the monitoring area for performance efficiency that apply to serverless applications.
+See the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) whitepaper for best practices in the **monitoring** area for performance efficiency that apply to serverless applications.
 
 #### Tradeoffs
-See the AWS Well-Architected Framework whitepaper for best practices in the
-tradeoffs area for performance efficiency that apply to serverless applications.
+See the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) whitepaper for best practices in the **tradeoffs** area for performance efficiency that apply to serverless applications.
 
 #### Key AWS Services
 Key AWS Services for performance efficiency are DynamoDB Accelerator, API Gateway, Step Functions, NAT gateway, Amazon VPC, and Lambda.
@@ -890,18 +892,18 @@ Refer to the following resources to learn more about our best practices for secu
 
 ##### Documentation & Blogs
 
-- AWS Lambda FAQs56
-- Best Practices for Working with AWS Lambda Functions57
-- AWS Lambda: How It Works58
-- Understanding Container Reuse in AWS Lambda59
-- Configuring a Lambda Function to Access Resources in an Amazon VPC60
-- Enable API Caching to Enhance Responsiveness61
-- DynamoDB: Global Secondary Indexes62
-- Amazon DynamoDB Accelerator (DAX)63
-- Developer Guide: Kinesis Streams64
+- [AWS Lambda FAQs](https://aws.amazon.com/lambda/faqs/)
+- [Best Practices for Working with AWS Lambda Functions](http://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
+- [AWS Lambda: How It Works](http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html)
+- [Understanding Container Reuse in AWS Lambda](https://aws.amazon.com/blogs/compute/container-reuse-in-lambda/)
+- [Configuring a Lambda Function to Access Resources in an Amazon VPC](http://docs.aws.amazon.com/lambda/latest/dg/vpc.html)
+- [Enable API Caching to Enhance Responsiveness](http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
+- [DynamoDB: Global Secondary Indexes](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html)
+- [Amazon DynamoDB Accelerator (DAX)](https://aws.amazon.com/dynamodb/dax/)
+- [Developer Guide: Kinesis Streams](http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html)
 
 ### Cost Optimization Pillar
-The cost optimization pillar includes the continual process of refinement and improvement of a system over its entire lifecycle. From the initial design of your very first proof of concept to the ongoing operation of production workloads, adopting the practices in this document will enable you to build and operate cost-aware systems that achieve business outcomes and minimize costs, thus allowing your business to maximize its return on investment.
+The **cost optimization** pillar includes the continual process of refinement and improvement of a system over its entire lifecycle. From the initial design of your very first proof of concept to the ongoing operation of production workloads, adopting the practices in this document will enable you to build and operate cost-aware systems that achieve business outcomes and minimize costs, thus allowing your business to maximize its return on investment.
 
 #### Definition
 There are four best practice areas for cost optimization in the cloud:
@@ -934,9 +936,9 @@ Using the least amount of memory might seem like the perfect strategy for reduci
 The AWS serverless architecture is designed to scale based on demand, so you don’t need to worry about overprovisioning or under provisioning.
 
 ##### Expenditure Awareness
-As covered in the AWS Well-Architected Framework, the increased flexibility and agility that the cloud enables encourages innovation and fast-paced development and deployment. It eliminates the manual processes and time associated with provisioning on-premises infrastructure, including identifying hardware specifications, negotiating price quotations, managing purchase orders, scheduling shipments, and then deploying the resources.
+As covered in the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/), the increased flexibility and agility that the cloud enables encourages innovation and fast-paced development and deployment. It eliminates the manual processes and time associated with provisioning on-premises infrastructure, including identifying hardware specifications, negotiating price quotations, managing purchase orders, scheduling shipments, and then deploying the resources.
 
-We recommend reading the AWS Well-Architected Framework whitepaper to dive deep into the topics discussed there. However, some of the questions mentioned there might not fully apply to serverless architectures. An example of this would be the need to decommission resources such as AWS Lambda since it doesn’t cost anything when idle.
+We recommend reading the [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/) whitepaper to dive deep into the topics discussed there. However, some of the questions mentioned there might not fully apply to serverless architectures. An example of this would be the need to decommission resources such as AWS Lambda since it doesn’t cost anything when idle.
 
 For all other scenarios, such as unused APIs, Kinesis shards, or DynamoDB tables, existing questions and recommendations still apply and so there is no unique practice to serverless applications here.
 
@@ -953,7 +955,7 @@ As AWS releases new services and features, it is a best practice to review your 
 
 AWS Lambda uses CloudWatch Logs to store the output of the executions in order to identify and troubleshoot problems on executions as well as monitoring the serverless application. These will impact the cost in the CloudWatch Logs service in two dimensions: ingestion and storage.
 
-When deploying your functions to AWS Lambda, it is important to remove unnecessary print statements within the code as this will be ingested into CloudWatch and increase the cost per ingestion of the same. A good approach to maintain these prints when needed is the use tools or libraries and best practices such as logging65 and set the correct logging level whenever it’s needed through environment variables. This way, unless specifically activated, logs ingested will be INFO and not DEBUG.
+When deploying your functions to AWS Lambda, it is important to remove unnecessary print statements within the code as this will be ingested into CloudWatch and increase the cost per ingestion of the same. A good approach to maintain these prints when needed is the use tools or libraries and best practices such as [logging](https://docs.python.org/2/library/logging.html) and set the correct logging level whenever it’s needed through environment variables. This way, unless specifically activated, logs ingested will be INFO and not DEBUG.
 
 In order to reduce log storage costs, it is recommended to leverage the following features:
 
@@ -966,7 +968,7 @@ With these two approaches, you will be able to save costs in terms of log storag
 
 When designing the architecture, unnecessary Lambda executions can increase our overall solution cost. This can be avoided following this simple principle:
 
-Use Lambda functions to transform data, not to transport data.
+_Use Lambda functions to **transform data**, not to **transport data**._
 
 If a Lambda function is just passing information from one layer of your stack to another without performing any modification, most likely this Lambda function can be replaced with a more cost effective solution.
 
@@ -974,7 +976,7 @@ Using features such as API Gateway service proxy or direct integrations between 
 
 With regard to unnecessary invocations, integration of both Kinesis and DynamoDB with AWS Lambda makes it ideal to batch requests into a single invocation when latency is an acceptable tradeoff for throughput. This enables you to reduce overall concurrency, invocations, and cost.
 
-Most serverless architectures use API Gateway as the entry point for final users. This is due to the fact that a RESTful API, agnostic of the implementation, is always a good service contract between our infrastructure and the final user. For more information, see the Microservices scenario.
+Most serverless architectures use API Gateway as the entry point for final users. This is due to the fact that a RESTful API, agnostic of the implementation, is always a good service contract between our infrastructure and the final user. For more information, see the [Microservices scenario](#RESTful-Microservices).
 
 These are some of the approaches that could be considered here:
 
@@ -992,7 +994,7 @@ There are scenarios where you need to talk to a private endpoint/resource that m
 
 With this approach, API Gateway sends incoming requests to an internal network load balancer in your VPC which can forward the traffic to any backend— either in the same VPC or on-premises using an IP address. This has both cost and performance benefits as you essentially don’t need an additional hop to send requests to a private backend with the added benefits of authorization, throttling, and caching mechanisms API Gateway provides without requiring a Lambda function to proxy such request.
 
-Amazon SNS can be used to trigger an AWS Lambda function in response to published topic messages. Since Amazon SNS publishes messages to all topic subscribers, you can optimize subscriber-relevancy and AWS Lambda usage through SNS Filtering capabilities. This enables you to apply policies to ensure subscriber notifications are sent only when the event needs to be handled. This approach avoids broadcasting all messages to all subscribers unnecessarily. This reduces the cost of your infrastructure since the logic behind this filtering is no longer within the Lambda function code.
+Amazon SNS can be used to trigger an AWS Lambda function in response to published topic messages. Since Amazon SNS publishes messages to all topic subscribers, you can optimize subscriber-relevancy and AWS Lambda usage through [SNS Filtering capabilities](https://docs.aws.amazon.com/sns/latest/dg/message-filtering.html). This enables you to apply policies to ensure subscriber notifications are sent only when the event needs to be handled. This approach avoids broadcasting all messages to all subscribers unnecessarily. This reduces the cost of your infrastructure since the logic behind this filtering is no longer within the Lambda function code.
 
 > SERVCOST 4: How are you optimizing your Lambda functions to reduce overall execution time?
 
@@ -1019,18 +1021,18 @@ Refer to the following resources to learn more about our best practices for secu
 
 ##### Documentation & Blogs
 
-- CloudWatch Logs Retention66
-- Exporting CloudWatch Logs to Amazon S367
-- Streaming CloudWatch Logs to Amazon ES68
-- Defining wait states in Step Functions state machines69
-- Coca-Cola Vending Pass State Machine Powered by Step Functions70
-- Building high throughput genomics batch workflows on AWS71
-- Simplify your Pub/Sub Messaging with Amazon SNS Message Filtering
-- S3 Select and Glacier Select
-- Lambda Reference Architecture for MapReduce
+- [CloudWatch Logs Retention](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SettingLogRetention.html)
+- [Exporting CloudWatch Logs to Amazon S3](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/S3ExportTasksConsole.html)
+- [Streaming CloudWatch Logs to Amazon ES](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_ES_Stream.html)
+- [Defining wait states in Step Functions state machines](http://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-wait-state.html)
+- [Coca-Cola Vending Pass State Machine Powered by Step Functions](https://aws.amazon.com/blogs/aws/things-go-better-with-step-functions/)
+- [Building high throughput genomics batch workflows on AWS](https://aws.amazon.com/blogs/compute/building-high-throughput-genomics-batch-workflows-on-aws-workflow-layer-part-4-of-4/)
+- [Simplify your Pub/Sub Messaging with Amazon SNS Message Filtering](https://aws.amazon.com/blogs/compute/simplify-pubsub-messaging-with-amazon-sns-message-filtering/)
+- [S3 Select and Glacier Select](https://aws.amazon.com/blogs/aws/s3-glacier-select/)
+- [Lambda Reference Architecture for MapReduce](https://github.com/awslabs/lambda-refarch-mapreduce)
 
 ##### Whitepaper
-- Optimizing Enterprise Economics with Serverless Architectures72
+- [Optimizing Enterprise Economics with Serverless Architectures](https://d0.awsstatic.com/whitepapers/optimizing-enterprise-economics-serverless-architectures.pdf)
 
 ## Conclusion
 While serverless applications take the undifferentiated heavy-lifting off developers, there are still important principles to apply.
@@ -1054,11 +1056,12 @@ The following individuals and organizations contributed to this document:
 ## Further Reading
 For additional information, see the following:
 
-- AWS Well-Architected Framework73
+- [AWS Well-Architected Framework](https://aws.amazon.com/jp/architecture/well-architected/)73
 
 ## Document Revisions
 
 | Date | Description |
+| --- | --- |
 | November 2018 | New scenarios for Alexa and Mobile, and updates throughout to reflect new features and evolution of best practice. |
 | November 2017 | Original publication. |
 
