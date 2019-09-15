@@ -509,7 +509,7 @@ Figure 10: AWS_IAM authorization
 
 For customers who currently have an existing Identity Provider (IdP), you can leverage an API Gateway Lambda authorizer to invoke a Lambda function to authenticate/validate a given user against your IdP. That is also commonly used when you want to perform additional logic on top of an existing IdP. A Lambda authorizer can send additional information derived from bearer token or request context values to your backend service. For example, the authorizer can return a map containing user-ids, user-names, and scope. By using Lambda authorizers, your backend does not require the capability to map authorization tokens to user-centric data, allowing you to limit the exposure of such information to just the authorization function.
 
-![](fig13.png)
+![](fig12.png)
 Figure 12: API Gateway Lambda authorizer
 
 For customers who don’t have an IdP, you can leverage Amazon Cognito user pools to either provide built-in user management or integrate with external identity providers such as Facebook, Twitter, Google+, and Amazon.
